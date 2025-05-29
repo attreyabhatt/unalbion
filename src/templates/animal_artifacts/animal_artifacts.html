@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+Unalbion - Animal Artifacts
+{% endblock head_title %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row mb-3 mt-3">
+        <div class="col-md-12">
+            <h1>Animal Artifacts</h1>
+            <p>Enter the currrent market price of each animal artifact, being sold at the market.</p>
+        </div>
+    </div>
+    <form id="animal_artifacts_form" name="animal_artifacts_form" method="POST" action="{% url 'animal_artifacts' %}">
+        {% csrf_token %}
+        <table action={% url 'animal_artifacts' %} method="POST" class="table table-hover table-sm table-bordered">
+            <!-- <caption>Enter the currrent Market Price each animal artifact is being sold at the market </caption> -->
+            <thead class="">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Animal Name</th>
+                    <th scope="col">Rugged (t3)</th>
+                    <th scope="col">Fine (t5)</th>
+                    <th scope="col">Excellent (t7)</th>
+                </tr>
+            </thead>
+            <tbody class="">
+                {% for r,f,e in artifact_zipped_list %}
+                <tr>
+                    <th scope="row" class="align-middle">{{forloop.counter}}</th>
+                    <td class="align-middle">{{r.name}}</td>
+
+                    <td><input type="number" class="form-control" id="t1shadow" placeholder="Enter Price"
+                            value={{r.market_price}} name={{r.id}} >
+                    </td>
+                    </td>
+                    <td><input type="number" class="form-control" id="t2shadow" placeholder="Enter Price"
+                            value="{{f.market_price}}" name={{f.id}}></td>
+                    </td>
+                    <td><input type="number" class="form-control" id="t3shadow" placeholder="Enter Price"
+                            value="{{e.market_price}}" name={{e.id}}></td>
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+        <div class="row justify-content-center">
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-primary">Calculate Profit</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+
+
+{% endblock content %}
