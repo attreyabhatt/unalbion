@@ -6,6 +6,9 @@ Unalbion - Animal Artifacts
 
 {% block content %}
 
+{% load static %}
+
+
 <div class="container">
     <div class="row mb-3 mt-3">
         <div class="col-md-12">
@@ -13,6 +16,7 @@ Unalbion - Animal Artifacts
             <p>Enter the currrent market price of each animal artifact, being sold at the market.</p>
         </div>
     </div>
+
     <form id="animal_artifacts_form" name="animal_artifacts_form" method="POST" action="{% url 'animal_artifacts' %}">
         {% csrf_token %}
         <table action={% url 'animal_artifacts' %} method="POST" class="table table-hover table-sm table-bordered">
@@ -32,15 +36,15 @@ Unalbion - Animal Artifacts
                     <th scope="row" class="align-middle">{{forloop.counter}}</th>
                     <td class="align-middle">{{r.name}}</td>
 
-                    <td><input type="number" class="form-control" id="t1shadow" placeholder="Enter Price"
-                            value={{r.market_price}} name={{r.id}} >
+                    <td><input type="number" class="form-control" id={{r.code_name}} placeholder="Enter Price"
+                            value={{r.market_price}} name={{r.code_name}} data-name="{{r.name}}" data-tier="T3 Rugged">
                     </td>
                     </td>
-                    <td><input type="number" class="form-control" id="t2shadow" placeholder="Enter Price"
-                            value="{{f.market_price}}" name={{f.id}}></td>
+                    <td><input type="number" class="form-control" id={{f.code_name}} placeholder="Enter Price"
+                            value="{{f.market_price}}" name={{f.code_name}} data-tier="T5 Fine"></td>
                     </td>
-                    <td><input type="number" class="form-control" id="t3shadow" placeholder="Enter Price"
-                            value="{{e.market_price}}" name={{e.id}}></td>
+                    <td><input type="number" class="form-control" id={{e.code_name}} placeholder="Enter Price"
+                            value="{{e.market_price}}" name={{e.code_name}} data-tier="T7 Excellent"></td>
                     </td>
 
                 </tr>
@@ -55,9 +59,27 @@ Unalbion - Animal Artifacts
         </div>
 
     </form>
+    <div class="row mb-3 mt-3 d-none" id="profit_row">
+        <div class="col-md-12">
+            <h1>Profits</h1>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkChecked" name="show_only_profit" checked>
+                <label class="form-check-label" for="checkChecked">
+                    Show only profitable artifacts
+                </label>
+            </div>
+            
+            <p id="shadow_profit"></p>
+            <p id="root_profit"></p>
+            <p id="spirit_profit"></p>
+            <p id="werewolf_profit"></p>
+            <p id="imp_profit"></p>
+            <p id="runestone_profit"></p>
+            <p id="dawn_profit"></p>
+        </div>
+    </div>
 </div>
 
-
-
+<script src="{% static 'js/main.js' %}"></script>
 
 {% endblock content %}
