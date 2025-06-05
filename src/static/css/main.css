@@ -1,0 +1,33 @@
+.roboto-albion {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+
+.albion-btn {
+    background-color: #701604;
+    color: #fff;
+}
+
+.albion-btn:hover {
+    background-color: #c63000;
+    color: #fff;
+}
+
+.albion-btn-outline {
+    border: 2px solid #701604;
+    background-color: white;
+    color: #701604;
+    padding: 0.375rem 0.75rem;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 0.375rem;
+}
+
+.albion-btn-outline:hover {
+    background-color: #701604;
+    color: white;
+}

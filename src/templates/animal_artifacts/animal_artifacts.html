@@ -17,9 +17,10 @@ Unalbion - Animal Artifacts
         </div>
     </div>
 
-    <form id="animal_artifacts_form" name="animal_artifacts_form" method="POST" action="{% url 'animal_artifacts' %}">
+    <form id="animal_artifacts_form" name="animal_artifacts_form" method="POST"
+        action="{% url 'animal_artifacts' %}/#profit_row">
         {% csrf_token %}
-        <table action={% url 'animal_artifacts' %} method="POST" class="table table-hover table-sm table-bordered">
+        <table action={% url 'animal_artifacts' %} method="POST" class="table table-hover table-sm">
             <!-- <caption>Enter the currrent Market Price each animal artifact is being sold at the market </caption> -->
             <thead class="">
                 <tr>
@@ -54,28 +55,40 @@ Unalbion - Animal Artifacts
         </table>
         <div class="row justify-content-center">
             <div class="col-sm-2">
-                <button type="submit" class="btn btn-primary">Calculate Profit</button>
+                <button type="submit" class="btn albion-btn">Calculate Profit</button>
             </div>
         </div>
 
     </form>
     <div class="row mb-3 mt-3 d-none" id="profit_row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <h1>Profits</h1>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="checkChecked" name="show_only_profit" checked>
+                <input class="form-check-input" type="checkbox" value="" id="checkChecked" name="show_only_profit"
+                    checked>
                 <label class="form-check-label" for="checkChecked">
                     Show only profitable artifacts
                 </label>
             </div>
-            
-            <p id="shadow_profit"></p>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" id="shadow_profit"></li>
+                <li class="list-group-item" id="root_profit"></li>
+                <li class="list-group-item" id="spirit_profit"></li>
+                <li class="list-group-item" id="werewolf_profit"></li>
+                <li class="list-group-item" id="imp_profit"></li>
+                <li class="list-group-item" id="runestone_profit"></li>
+                <li class="list-group-item" id="dawn_profit"></li>
+            </ul>
+            <!-- <p id="shadow_profit"></p>
             <p id="root_profit"></p>
             <p id="spirit_profit"></p>
             <p id="werewolf_profit"></p>
             <p id="imp_profit"></p>
             <p id="runestone_profit"></p>
-            <p id="dawn_profit"></p>
+            <p id="dawn_profit"></p> -->
+
+            
         </div>
     </div>
 </div>

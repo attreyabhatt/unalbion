@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     # custom apps
     'animal_artifacts',
+    'account',  # custom authentication app
 ]
 
 MIDDLEWARE = [
@@ -124,6 +125,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend', # This is the default that allows us to log in via username
+    'account.authentication.EmailAuthBackend'
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

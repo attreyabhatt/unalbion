@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import home_view,animal_artifact_view
+from account.views import login_signup_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
     path('animal-artifacts/', animal_artifact_view, name='animal_artifacts'),
+    path('accounts/',login_signup_view,name='accounts')
 ]

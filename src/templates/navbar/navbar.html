@@ -1,28 +1,36 @@
-<nav class="navbar navbar-expand-lg ">
+{% load static %}
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
-        <div class="d-flex flex-grow-1">
-            <span class="w-100 d-lg-none d-block">
-                <!-- hidden spacer to center brand on mobile --></span>
-            <a class="navbar-brand" href={% url 'home' %}> Unalbion </a>
-            <div class="w-100 text-right">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavbar7">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </div>
-        <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar7">
-            <ul class="navbar-nav ms-auto flex-nowrap">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <button class="btn btn-danger" type="submit">Login</button>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <button class="btn btn-danger" type="submit">Signup</button>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <!-- <a class="navbar-brand" href={% url 'home' %}> Unalbion </a> -->
+        <a class="navbar-brand" href={% url 'home' %}>
+            <img src="{% static 'images/logo5.png' %}" alt="Bootstrap" width="110" >
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        {% if user.is_authenticated %}
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">
+                    Welcome <i>{{ user.username}}</i>
+                </a>
+            </li>
+        </ul>
+        <form class="d-flex" role="logout" method="POST" action="{% url 'accounts' %}">
+            {% csrf_token %}
+
+            <button class="btn albion-btn-outline" type="submit" name="logout-form">Logout</button>
+        </form>
+        {% else %}
+        <form class="d-flex" role="login-signup" method="POST" action="{% url 'accounts' %}">
+            {% csrf_token %}
+            <input class="form-control me-2" type="text" placeholder="Enter username" name="login-signup-form" />
+            <button class="btn albion-btn-outline" type="submit">Login/Signup</button>
+        </form>
+        {% endif %}
+
     </div>
 </nav>
