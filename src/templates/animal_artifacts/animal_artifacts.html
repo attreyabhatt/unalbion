@@ -7,7 +7,7 @@ Unalbion - Animal Artifacts
 {% block content %}
 
 {% load static %}
-
+{% load get_item %}
 
 <div class="container">
     <div class="row mb-3 mt-3">
@@ -17,80 +17,87 @@ Unalbion - Animal Artifacts
         </div>
     </div>
 
-    <form id="animal_artifacts_form" name="animal_artifacts_form" method="POST"
-        action="{% url 'animal_artifacts' %}/#profit_row">
+    <form id="animal_artifacts_form" name="animal_artifacts_form" method="POST" action="{% url 'animal_artifacts' %}">
         {% csrf_token %}
-        <table action={% url 'animal_artifacts' %} method="POST" class="table table-hover table-sm">
-            <!-- <caption>Enter the currrent Market Price each animal artifact is being sold at the market </caption> -->
-            <thead class="">
+
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered table-striped align-middle ">
+                <caption class="text-muted">Enter the current market price of each animal artifact</caption>
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Animal Name</th>
+                        <th scope="col">Rugged (T3)</th>
+                        <th scope="col">Fine (T5)</th>
+                        <th scope="col">Excellent (T7)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for name, items_by_tier in grouped_items.items %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ name }}</strong></td>
+                        {% for tier in artifact_types %}
+                        <td>
+                            {% with item=items_by_tier|get_item:tier %}
+                            {% if item %}
+                            <input type="number" class="form-control form-control-sm" id="{{ item.code_name }}"
+                                name="{{ item.code_name }}" placeholder="Enter Price"
+                                value="{{ item.market_price|default:'' }}" data-name="{{ item.name }}"
+                                data-tier="T{{ item.artifact.get_artifact_type_display|slice:':1' }} {{ item.artifact.get_artifact_type_display }}">
+                            {% else %}
+                            <span class="text-muted">–</span>
+                            {% endif %}
+                            {% endwith %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            <div class="col-sm-auto">
+                <button type="submit" class="btn btn-primary px-4" id="calculate-profit-btn">Calculate Profit</button>
+            </div>
+        </div>
+    </form>
+
+    <style>
+        .table-light {
+            background-color: #f8f9fa !important;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        #profit-table tbody tr td:first-child {
+            font-weight: bold;
+        }
+    </style>
+
+    <h4 class="mt-5">Profit Table</h4>
+    <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" id="profitToggle" checked>
+        <label class="form-check-label" for="profitToggle">Show Only Profitable Rows</label>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover align-middle shadow-sm table-sm" id="profit-table">
+            <thead class="table-primary text-center">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Animal Name</th>
-                    <th scope="col">Rugged (t3)</th>
-                    <th scope="col">Fine (t5)</th>
-                    <th scope="col">Excellent (t7)</th>
+                    <th style="width: 30%">Animal Name</th>
+                    <th style="width: 35%">From → To</th>
+                    <th style="width: 35%">Profit (Silver)</th>
                 </tr>
             </thead>
-            <tbody class="">
-                {% for r,f,e in artifact_zipped_list %}
-                <tr>
-                    <th scope="row" class="align-middle">{{forloop.counter}}</th>
-                    <td class="align-middle">{{r.name}}</td>
-
-                    <td><input type="number" class="form-control" id={{r.code_name}} placeholder="Enter Price"
-                            value={{r.market_price}} name={{r.code_name}} data-name="{{r.name}}" data-tier="T3 Rugged">
-                    </td>
-                    </td>
-                    <td><input type="number" class="form-control" id={{f.code_name}} placeholder="Enter Price"
-                            value="{{f.market_price}}" name={{f.code_name}} data-tier="T5 Fine"></td>
-                    </td>
-                    <td><input type="number" class="form-control" id={{e.code_name}} placeholder="Enter Price"
-                            value="{{e.market_price}}" name={{e.code_name}} data-tier="T7 Excellent"></td>
-                    </td>
-
-                </tr>
-                {% endfor %}
-
-            </tbody>
+            <tbody class="table-group-divider"></tbody>
         </table>
-        <div class="row justify-content-center">
-            <div class="col-sm-2">
-                <button type="submit" class="btn albion-btn">Calculate Profit</button>
-            </div>
-        </div>
-
-    </form>
-    <div class="row mb-3 mt-3 d-none" id="profit_row">
-        <div class="col-md-6">
-            <h1>Profits</h1>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="checkChecked" name="show_only_profit"
-                    checked>
-                <label class="form-check-label" for="checkChecked">
-                    Show only profitable artifacts
-                </label>
-            </div>
-
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item" id="shadow_profit"></li>
-                <li class="list-group-item" id="root_profit"></li>
-                <li class="list-group-item" id="spirit_profit"></li>
-                <li class="list-group-item" id="werewolf_profit"></li>
-                <li class="list-group-item" id="imp_profit"></li>
-                <li class="list-group-item" id="runestone_profit"></li>
-                <li class="list-group-item" id="dawn_profit"></li>
-            </ul>
-            <!-- <p id="shadow_profit"></p>
-            <p id="root_profit"></p>
-            <p id="spirit_profit"></p>
-            <p id="werewolf_profit"></p>
-            <p id="imp_profit"></p>
-            <p id="runestone_profit"></p>
-            <p id="dawn_profit"></p> -->
-
-            
-        </div>
     </div>
+
+
+
+
 </div>
 
 <script src="{% static 'js/main.js' %}"></script>

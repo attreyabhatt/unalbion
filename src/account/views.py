@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
+from animal_artifacts.models import AnimalArtifact, AnimalArtifactItem
 
 def login_signup_view(request):
     if request.method == 'POST':
@@ -10,10 +12,16 @@ def login_signup_view(request):
 
         if 'login-signup-form' in request.POST:
             username = request.POST.get('login-signup-form')
-            user = authenticate(request, username=username, password='')
-            if user is not None:
-                login(request, user)
-                return redirect('home')  # Redirect to your home page
+            if username is None or username.strip() == '':
+                return render(request, 'home.html', {'error': 'Username cannot be empty.'})
             else:
-                return render(request, 'home.html', {'error': 'Invalid username'})
+                user = authenticate(request, username=username, password='')
+                if user is not None:
+                    login(request, user)
+                    return redirect('home')  # Redirect to your home page
+                else:
+                    user = User.objects.create_user(username=username, password='')
+                    login(request, user,backend='django.contrib.auth.backends.ModelBackend')
+
+                    return redirect('home')
     return render(request, 'home.html')
