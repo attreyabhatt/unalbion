@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const inputs = form.querySelectorAll("input[type='number']");
 
-    // Helper to add profit rows
     function addProfitRow(tbody, direction, profit, isFirstRow = false, name = "") {
         const row = document.createElement("tr");
         row.setAttribute("data-profit", profit);
@@ -66,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const { t3, t5, t7 } = data[name];
             let isFirstRow = true;
 
-            // Add a separator row (line break)
             const spacer = document.createElement("tr");
             spacer.innerHTML = `<td colspan="3" class="table-light"></td>`;
             profitTableBody.appendChild(spacer);
@@ -97,14 +95,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const rows = document.querySelectorAll("#profit-table tbody tr");
 
         rows.forEach(row => {
-            if (!row.hasAttribute("data-profit")) return; // skip spacer rows
-
+            if (!row.hasAttribute("data-profit")) return;
             const profit = parseFloat(row.getAttribute("data-profit"));
             row.style.display = (showOnlyProfitable && profit <= 0) ? "none" : "";
         });
     }
 
-    // Bootstrap icon link (if not already added)
     if (!document.querySelector("link[href*='bootstrap-icons']")) {
         const iconLink = document.createElement("link");
         iconLink.rel = "stylesheet";
@@ -112,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.head.appendChild(iconLink);
     }
 
-    // Events
     calculateProfits();
     inputs.forEach((input) => input.addEventListener("input", calculateProfits));
     profitToggle.addEventListener("change", applyProfitFilter);

@@ -21,7 +21,7 @@ Unalbion - Animal Artifacts
         {% csrf_token %}
 
         <div class="table-responsive">
-            <table class="table table-hover table-bordered table-striped align-middle ">
+            <table class="table table-hover table-bordered table-striped align-middle" id="animal-artifacts-table">
                 <caption class="text-muted">Enter the current market price of each animal artifact</caption>
                 <thead class="table-dark">
                     <tr>
@@ -35,7 +35,7 @@ Unalbion - Animal Artifacts
                 <tbody>
                     {% for name, items_by_tier in grouped_items.items %}
                     <tr>
-                        <td>{{ forloop.counter }}</td>
+                        <td>{{forloop.counter}}</td>
                         <td><strong>{{ name }}</strong></td>
                         {% for tier in artifact_types %}
                         <td>
@@ -71,33 +71,51 @@ Unalbion - Animal Artifacts
             letter-spacing: 0.5px;
         }
 
-        #profit-table tbody tr td:first-child {
+        table caption {
+            caption-side: top;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #6c757d;
+        }
+
+        #profit-table td:first-child {
             font-weight: bold;
+        }
+
+        #profit-table .badge {
+            font-size: 1rem;
+            padding: 0.5em 0.75em;
+        }
+
+        #profit-table i {
+            vertical-align: middle;
+        }
+
+        #profit-table tr:hover {
+            background-color: #f2f2f2;
         }
     </style>
 
     <h4 class="mt-5">Profit Table</h4>
     <div class="form-check form-switch mb-3">
         <input class="form-check-input" type="checkbox" id="profitToggle" checked>
-        <label class="form-check-label" for="profitToggle">Show Only Profitable Rows</label>
+        <label class="form-check-label" for="profitToggle">Show Only Profitable Items</label>
     </div>
 
     <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover align-middle shadow-sm table-sm" id="profit-table">
-            <thead class="table-primary text-center">
+        <table class="table table-hover table-bordered table-striped align-middle" id="profit-table">
+            <caption class="text-muted">Calculated profit between artifact tiers</caption>
+            <thead class="table-dark">
                 <tr>
-                    <th style="width: 30%">Animal Name</th>
-                    <th style="width: 35%">From → To</th>
-                    <th style="width: 35%">Profit (Silver)</th>
+                    <th scope="col" style="width: 5%">#</th>
+                    <th scope="col" style="width: 30%">Animal Name</th>
+                    <th scope="col" style="width: 35%">From → To</th>
+                    <th scope="col" style="width: 35%">Profit (Silver)</th>
                 </tr>
             </thead>
-            <tbody class="table-group-divider"></tbody>
+            <tbody></tbody>
         </table>
     </div>
-
-
-
-
 </div>
 
 <script src="{% static 'js/main.js' %}"></script>
