@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+Unalbion - Home
+{% endblock head_title %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card shadow-sm border-0 rounded-4 bg-light">
+        <div class="card-body p-4">
+            <div class="d-flex align-items-start">
+                <div class="me-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#701604"
+                        class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M6.364 13.5a.5.5 0 0 0 .707 0L10 10.571V12.5a.5.5 0 0 0 1 0v-3.571a.5.5 0 0 0-.5-.5H7.5a.5.5 0 0 0 0 1H9.429L7.071 12.793a.5.5 0 0 0 0 .707z" />
+                        <path fill-rule="evenodd"
+                            d="M1.5 3A1.5 1.5 0 0 1 3 1.5h10A1.5 1.5 0 0 1 14.5 3v10A1.5 1.5 0 0 1 13 14.5H3A1.5 1.5 0 0 1 1.5 13V3zm1 0A.5.5 0 0 0 2 3v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2.5z" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="row">
+                        <h5 class="card-title text-dark">Log in to Unlock Features</h5>
+                        <p class="card-text text-muted mb-3">
+                            It’s free and takes just a second! Just pick any username and click “Login / Signup”.
+                            By logging in, your data will be saved — no need to retype market prices every time.
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-auto">
+                            {% include 'accounts/login.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

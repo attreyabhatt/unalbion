@@ -4,7 +4,7 @@
     <div class="container">
         <!-- <a class="navbar-brand" href={% url 'home' %}> Unalbion </a> -->
         <a class="navbar-brand" href={% url 'home' %}>
-            <img src="{% static 'images/logo5.png' %}" alt="Bootstrap" width="110" >
+            <img src="{% static 'images/logo5.png' %}" alt="Bootstrap" width="110">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,11 +25,7 @@
             <button class="btn albion-btn-outline" type="submit" name="logout-form">Logout</button>
         </form>
         {% else %}
-        <form class="d-flex" role="login-signup" method="POST" action="{% url 'accounts' %}">
-            {% csrf_token %}
-            <input class="form-control me-2" type="text" placeholder="Enter username" name="login-signup-form" />
-            <button class="btn albion-btn-outline" type="submit">Login/Signup</button>
-        </form>
+            {% include 'accounts/login.html' %}
         {% endif %}
 
     </div>

@@ -1,0 +1,9 @@
+<form class="d-flex" role="login-signup" method="POST" action="{% url 'accounts' %}">
+    {% csrf_token %}
+    <input class="form-control me-2" type="text" placeholder="Enter username" name="login-signup-form" />
+    
+    <!-- Hidden field to remember current page -->
+    <input type="hidden" name="next" value="{{ request.path }}">
+    
+    <button class="btn albion-btn-outline" type="submit">Login/Signup</button>
+</form>
