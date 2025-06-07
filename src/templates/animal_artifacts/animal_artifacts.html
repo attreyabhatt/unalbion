@@ -13,14 +13,14 @@ Unalbion - Animal Artifacts
     <div class="row mb-3 mt-3">
         <div class="col-md-12">
             <h1>Animal Artifacts</h1>
-            <p>Enter the currrent market price of each animal artifact, being sold at the market.</p>
+            <p>Enter the current market price of each animal artifact being sold at the market.</p>
         </div>
     </div>
 
     <form id="animal_artifacts_form" name="animal_artifacts_form" method="POST" action="{% url 'animal_artifacts' %}">
         {% csrf_token %}
 
-        <div class="table-responsive">
+        <div class="table-responsive card p-3 shadow-sm mb-4">
             <table class="table table-hover table-bordered table-striped align-middle" id="animal-artifacts-table">
                 <caption class="text-muted">Enter the current market price of each animal artifact</caption>
                 <thead class="table-dark">
@@ -35,7 +35,7 @@ Unalbion - Animal Artifacts
                 <tbody>
                     {% for name, items_by_tier in grouped_items.items %}
                     <tr>
-                        <td>{{forloop.counter}}</td>
+                        <td>{{ forloop.counter }}</td>
                         <td><strong>{{ name }}</strong></td>
                         {% for tier in artifact_types %}
                         <td>
@@ -57,12 +57,50 @@ Unalbion - Animal Artifacts
             </table>
         </div>
 
-        <div class="row justify-content-center mt-3">
+        <div class="row justify-content-end mt-3">
             <div class="col-sm-auto">
-                <button type="submit" class="btn btn-primary px-4" id="calculate-profit-btn">Calculate Profit</button>
+                <a href="#profit-table-container" class="btn albion-btn px-4" id="see-profit-btn">
+                    See Profit  
+                </a>
+                
+            </div>
+            <div class="col-sm-auto">
+                <button type="submit" class="btn albion-btn px-4" id="calculate-profit-btn">
+                    Save this data
+                </button>
             </div>
         </div>
     </form>
+
+    <h4 class="mt-5">Profit Table</h4>
+    <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" id="profitToggle" checked>
+        <label class="form-check-label" for="profitToggle">Show Only Profitable Items</label>
+    </div>
+
+    <div class="table-responsive card p-3 shadow-sm" id="profit-table-container">
+        <table class="table table-hover table-bordered table-striped align-middle" id="profit-table">
+            <caption class="text-muted">Calculated profit between artifact tiers</caption>
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Animal Name</th>
+                    <th scope="col">From → To</th>
+                    <th scope="col">Profit (Silver)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="toastNotification" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">Profits calculated successfully!</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
 
     <style>
         .table-light {
@@ -78,46 +116,23 @@ Unalbion - Animal Artifacts
             color: #6c757d;
         }
 
-        #profit-table td:first-child {
-            font-weight: bold;
-        }
-
         #profit-table .badge {
             font-size: 1rem;
-            padding: 0.5em 0.75em;
+            padding: 0.2em 0.5em;
         }
 
         #profit-table i {
             vertical-align: middle;
         }
 
-        #profit-table tr:hover {
-            background-color: #f2f2f2;
+        thead th {
+            position: sticky;
+            top: 0;
+            background-color: #343a40;
+            z-index: 10;
         }
     </style>
-
-    <h4 class="mt-5">Profit Table</h4>
-    <div class="form-check form-switch mb-3">
-        <input class="form-check-input" type="checkbox" id="profitToggle" checked>
-        <label class="form-check-label" for="profitToggle">Show Only Profitable Items</label>
-    </div>
-
-    <div class="table-responsive">
-        <table class="table table-hover table-bordered table-striped align-middle" id="profit-table">
-            <caption class="text-muted">Calculated profit between artifact tiers</caption>
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col" style="width: 5%">#</th>
-                    <th scope="col" style="width: 30%">Animal Name</th>
-                    <th scope="col" style="width: 35%">From → To</th>
-                    <th scope="col" style="width: 35%">Profit (Silver)</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
 </div>
 
 <script src="{% static 'js/main.js' %}"></script>
-
 {% endblock content %}

@@ -7,23 +7,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const inputs = form.querySelectorAll("input[type='number']");
 
+    // Helper to add profit rows
     function addProfitRow(tbody, direction, profit, isFirstRow = false, name = "") {
         const row = document.createElement("tr");
         row.setAttribute("data-profit", profit);
 
         let icon = "";
         let badgeClass = "bg-secondary";
+        let rowClass = "";
 
         if (profit > 0) {
             icon = `<i class="bi bi-arrow-up-circle-fill text-success me-1"></i>`;
             badgeClass = "bg-success";
+            rowClass = "table-success";
         } else if (profit < 0) {
             icon = `<i class="bi bi-arrow-down-circle-fill text-danger me-1"></i>`;
             badgeClass = "bg-danger";
+            rowClass = "table-danger";
         } else {
             icon = `<i class="bi bi-dash-circle-fill text-muted me-1"></i>`;
             badgeClass = "bg-secondary";
         }
+
+        row.className = `${rowClass}`;
 
         row.innerHTML = `
             <td>${isFirstRow ? `<strong>${name}</strong>` : ""}</td>
@@ -95,12 +101,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const rows = document.querySelectorAll("#profit-table tbody tr");
 
         rows.forEach(row => {
-            if (!row.hasAttribute("data-profit")) return;
+            if (!row.hasAttribute("data-profit")) return; // skip spacer rows
+
             const profit = parseFloat(row.getAttribute("data-profit"));
             row.style.display = (showOnlyProfitable && profit <= 0) ? "none" : "";
         });
     }
 
+    // Bootstrap icon link (if not already added)
     if (!document.querySelector("link[href*='bootstrap-icons']")) {
         const iconLink = document.createElement("link");
         iconLink.rel = "stylesheet";
@@ -108,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.head.appendChild(iconLink);
     }
 
+    // Events
     calculateProfits();
     inputs.forEach((input) => input.addEventListener("input", calculateProfits));
     profitToggle.addEventListener("change", applyProfitFilter);
