@@ -58,13 +58,13 @@ Unalbion - Animal Artifacts
         </div>
 
         <div class="row justify-content-end mt-3">
-            <div class="col-sm-auto">
-                <a href="#profit-table-container" class="btn albion-btn px-4" id="see-profit-btn">
-                    See Profit  
+            <div class="col-md-auto mb-1">
+                <a href="#profit-section" class="btn albion-btn px-4" id="see-profit-btn">
+                    See Profit
                 </a>
-                
+
             </div>
-            <div class="col-sm-auto">
+            <div class="col-md-auto">
                 <button type="submit" class="btn albion-btn px-4" id="calculate-profit-btn">
                     Save this data
                 </button>
@@ -72,7 +72,7 @@ Unalbion - Animal Artifacts
         </div>
     </form>
 
-    <h4 class="mt-5">Profit Table</h4>
+    <h4 class="mt-5" id="profit-section">Profit Table</h4>
     <div class="form-check form-switch mb-3">
         <input class="form-check-input" type="checkbox" id="profitToggle" checked>
         <label class="form-check-label" for="profitToggle">Show Only Profitable Items</label>
@@ -94,10 +94,12 @@ Unalbion - Animal Artifacts
 
     <!-- Toast Container -->
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="toastNotification" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="toastNotification" class="toast align-items-center text-white bg-success border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">Profits calculated successfully!</div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
             </div>
         </div>
     </div>
@@ -131,6 +133,7 @@ Unalbion - Animal Artifacts
             background-color: #343a40;
             z-index: 10;
         }
+
     </style>
 </div>
 
