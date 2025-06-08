@@ -28,7 +28,8 @@ DEBUG = config("DJANGO_DEBUG",cast=bool)
 
 
 ALLOWED_HOSTS = [
-    "*" # https://xyz.prod.railway.app
+    "*.ondigitalocean.app",
+    "unalbion.com"
 ]
 
 if DEBUG:
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 
     # custom apps
     'animal_artifacts',
+    'fishingbait',
     'account',  # custom authentication app
 ]
 

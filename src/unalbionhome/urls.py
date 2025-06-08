@@ -19,10 +19,12 @@ from django.urls import path
 from .views import home_view
 from animal_artifacts.views import animal_artifacts_view
 from account.views import login_signup_view
+from fishingbait.views import fishing_profit_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
     path('animal-artifacts/', animal_artifacts_view, name='animal_artifacts'),
-    path('accounts/',login_signup_view,name='accounts')
+    path('accounts/',login_signup_view,name='accounts'),
+    path('fishing-bait/', fishing_profit_view, name='fishing_bait'),
 ]

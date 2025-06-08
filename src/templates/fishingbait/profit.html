@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Fishing Bait Profit Calculator{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Fishing Bait Profit Calculator</h2>
+    <form method="POST" id="fishing-form">
+        {% csrf_token %}
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">🐛 Worm Price</label>
+                <input type="number" placeholder="Enter Price" name="worm_price" id="worm_price" class="form-control"
+                    value="{{ worm }}" min="0" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">🪱 T1 Bait Price</label>
+                <input type="number" placeholder="Enter Price" name="t1_price" id="t1_price" class="form-control"
+                    value="{{ t1 }}" min="0">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">🪱 T3 Bait Price</label>
+                <input type="number" placeholder="Enter Price" name="t3_price" id="t3_price" class="form-control"
+                    value="{{ t3 }}" min="0">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">🪱 T5 Bait Price</label>
+                <input type="number" placeholder="Enter Price" name="t5_price" id="t5_price" class="form-control"
+                    value="{{ t5 }}" min="0">
+            </div>
+        </div>
+
+        <div class="mt-4 d-flex gap-3">
+            <button type="submit" class="btn btn-success">Save Data</button>
+        </div>
+    </form>
+
+    <div id="profit-output" class="mt-4" style="display: none;">
+        <h4 class="text-center mb-3">Profit Results</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Fishing Bait Tier</th>
+                        <th>Profit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>T1</td>
+                        <td id="profit_t1">-</td>
+                    </tr>
+                    <tr>
+                        <td>T3</td>
+                        <td id="profit_t3">-</td>
+                    </tr>
+                    <tr>
+                        <td>T5</td>
+                        <td id="profit_t5">-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="{% static 'js/fishingbait/profit.js' %}"></script>
+
+{% endblock content %}

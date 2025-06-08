@@ -7,16 +7,33 @@ Unalbion - Home
 {% block content %}
 
 <div class="container mt-4">
-    <div class="card" style="width: 15rem;">
-        <img src="https://render.albiononline.com/v1/item/Excellent%20Spirit%20Paws@0.png?locale=en" class="card-img-top img-fluid img-thumbnail" width="100" height="100" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Animal Artifacts</h5>
-            <p class="card-text">Breakdown artifacts to earn profit.</p>
-            <a href={% url 'animal_artifacts' %} class="btn btn-primary btn-danger">Calculate</a>
+    <div class="row">
+        <div class="col-md-auto">
+            <div class="card" style="width: 15rem;">
+                <img src="https://render.albiononline.com/v1/item/Excellent%20Spirit%20Paws@0.png?locale=en"
+                    class="card-img-top img-fluid img-thumbnail" width="100" height="100" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Animal Artifacts</h5>
+                    <p class="card-text">Breakdown artifacts to earn profit.</p>
+                    <a href={% url 'animal_artifacts' %} class="btn btn-primary btn-danger">Calculate</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-auto">
+            <div class="card" style="width: 15rem;">
+                <img src="https://render.albiononline.com/v1/item/Special%20Fish%20Bait.png?locale=en"
+                    class="card-img-top img-fluid img-thumbnail" width="100" height="100" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Fishing Bait</h5>
+                    <p class="card-text">Convert worms into fishing baits</p>
+                    <a href={% url 'fishing_bait' %} class="btn btn-primary btn-danger">Calculate</a>
+                </div>
+            </div>
         </div>
     </div>
 
-    
+
+
 </div>
 
 {% endblock content %}
