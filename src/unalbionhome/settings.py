@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'animal_artifacts',
     'fishingbait',
     'account',  # custom authentication app
+    'potions'
 ]
 
 MIDDLEWARE = [
