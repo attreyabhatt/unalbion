@@ -1,0 +1,117 @@
+<!-- Animal Products Section -->
+{% load potion_filters %}
+
+<!-- Animal Products & Brews Section -->
+<div class="row">
+    <div class="col-md-4">
+        <h5 class="text-center">Milk</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Type</th>
+                        <th>Market price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in animal_fields %}
+                    {% if "_milk" in item.name %}
+                    <tr>
+                        <td>{{ item.name|replace:"_milk,"|replace_underscore_with_space|title }}</td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm ingredient-input"
+                                name="{{ item.name }}" value="{{ potion_input|getattribute:item.name|default:'' }}"
+                                data-ingredient="{{ item.name }}" placeholder="Price per unit">
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <h5 class="text-center">Butter</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Type</th>
+                        <th>Market price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in animal_fields %}
+                    {% if "_butter" in item.name %}
+                    <tr>
+                        <td>{{ item.name|replace:"_butter,"|replace_underscore_with_space|title }}</td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm ingredient-input"
+                                name="{{ item.name }}" value="{{ potion_input|getattribute:item.name|default:'' }}"
+                                data-ingredient="{{ item.name }}" placeholder="Price per unit">
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <h5 class="text-center">Eggs</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Type</th>
+                        <th>Market price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in animal_fields %}
+                    {% if "_eggs" in item.name %}
+                    <tr>
+                        <td>{{ item.name|replace:"_eggs,"|replace_underscore_with_space|title }}</td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm ingredient-input"
+                                name="{{ item.name }}" value="{{ potion_input|getattribute:item.name|default:'' }}"
+                                data-ingredient="{{ item.name }}" placeholder="Price per unit">
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-auto">
+        <h5 class="text-center">Schnapps / Brews</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Market price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in schnapps_fields %}
+                    <tr>
+                        <td>{{ item.name|replace_underscore_with_space|title }}</td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm ingredient-input"
+                                name="{{ item.name }}" value="{{ potion_input|getattribute:item.name|default:'' }}"
+                                data-ingredient="{{ item.name }}" placeholder="Price per unit">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    
+</div>

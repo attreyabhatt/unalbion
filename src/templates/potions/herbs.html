@@ -1,0 +1,23 @@
+{% load potion_filters %}
+
+<!-- <h5 class="text-center">Herbs</h5> -->
+<div class="table-responsive">
+    <table class="table table-bordered text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Herbs</th>
+                <th>Market price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for herb in herb_fields %}
+            <tr>
+                <td>{{herb.help_text}}</td>
+                <td> <input type="number" class="form-control form-control-sm ingredient-input" name="{{ herb.name }}"
+                        value="{{ potion_input|getattribute:herb.name|default:'' }}" data-ingredient="{{ herb.name }}"
+                        placeholder="Price per unit"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

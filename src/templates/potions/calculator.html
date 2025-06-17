@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load potion_filters %}
+
+{% block head_title %} Potions - Craft potions profitably {% endblock head_title %}
+
+{% block content %}
+
+
+<style>
+    .how-it-works-toggle {
+    color: #701604;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px dashed #701604;
+    padding-bottom: 2px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.how-it-works-toggle:hover {
+    color: #a13c3c;
+    border-color: #a13c3c;
+    text-decoration: none;
+}
+
+</style>
+
+<div class="container mt-4 mb-3">
+    <div class="p-2 mb-2 bg-white">
+        <h2 class="mb-2">🎯 Potion Profit Calculator</h2>
+
+        <a class="how-it-works-toggle" data-bs-toggle="collapse" href="#howItWorks" role="button" aria-expanded="false"
+            aria-controls="howItWorks">
+            🛈 How does this work?
+        </a>
+
+
+        <!-- Collapsible content -->
+        <div class="collapse mt-3" id="howItWorks">
+            <p class="text-muted">
+                Use this tool to calculate your potion crafting profitability in Albion Online.
+                Enter the latest market prices for herbs, animal products, artifacts, and schnapps on the left.
+                The app will instantly calculate the production cost and profit margin of each potion based on your
+                inputs.
+            </p>
+            <ul class="small text-muted">
+                <li>📦 Prices are saved to your account so you don’t need to re-enter them each time.</li>
+                <li>💡 Enchanted versions of potions (+1, +2, +3) are auto-calculated using artifact costs.</li>
+                <li>🧪 If a sale price is not entered, only the crafting cost will be shown.</li>
+                <li>⚠️ “Data Insufficient” will appear if any required ingredient price is missing.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Vertical Nav Tabs -->
+        <div class="col-md-3 mb-3 text-start">
+            <div class="nav flex-column nav-pills" id="v-potion-tabs" role="tablist" aria-orientation="vertical">
+                <button class="nav-link active" id="herbs-tab" data-bs-toggle="pill" data-bs-target="#herbs"
+                    type="button" role="tab" aria-controls="herbs" aria-selected="true">
+                    🌿 Herbs
+                </button>
+                <button class="nav-link" id="artifacts-tab" data-bs-toggle="pill" data-bs-target="#artifacts"
+                    type="button" role="tab" aria-controls="artifacts" aria-selected="false">
+                    🦴 Animal Artifacts
+                </button>
+                <button class="nav-link" id="products-tab" data-bs-toggle="pill" data-bs-target="#products"
+                    type="button" role="tab" aria-controls="products" aria-selected="false">
+                    🥛 Animal Products & Brews
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="col-md-9">
+            <div class="tab-content border p-3 bg-light rounded" id="v-potion-tabs-content">
+                <div class="tab-pane fade show active" id="herbs" role="tabpanel" aria-labelledby="herbs-tab">
+                    {% include 'potions/herbs.html' %}
+                </div>
+                <div class="tab-pane fade" id="artifacts" role="tabpanel" aria-labelledby="artifacts-tab">
+                    {% include 'potions/animal_artifacts.html' %}
+                </div>
+                <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="products-tab">
+                    {% include 'potions/animal_products.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

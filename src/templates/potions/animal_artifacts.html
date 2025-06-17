@@ -1,0 +1,52 @@
+{% load potion_filters %}
+
+<!-- <h5 class="text-center">Animal Artifacts</h5> -->
+<div class="table-responsive">
+    <table class="table table-bordered text-center align-middle" id="animal-artifact-table">
+        <thead class="table-dark">
+            <tr>
+                <th>Animal Name</th>
+                <th>Rugged (T3)</th>
+                <th>Fine (T5)</th>
+                <th>Excellent (T7)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% regroup all_artifacts by name as artifact_list %}
+            {% for group in artifact_list %}
+            <tr>
+                <td>{{ group.grouper }}</td>
+                <td>
+                    {% for item in group.list %}
+                    {% if item.artifact_type == "Rugged" %}
+                    <input type="number" class="form-control form-control-sm ingredient-input"
+                        name="artifact_{{ item.code_name }}" value="{{ item.current_price|default:'' }}"
+                        placeholder="Price">
+                    {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for item in group.list %}
+                    {% if item.artifact_type == "Fine" %}
+                    <input type="number" class="form-control form-control-sm ingredient-input"
+                        name="artifact_{{ item.code_name }}" value="{{ item.current_price|default:'' }}"
+                        placeholder="Price">
+                    {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for item in group.list %}
+                    {% if item.artifact_type == "Excellent" %}
+                    <input type="number" class="form-control form-control-sm ingredient-input"
+                        name="artifact_{{ item.code_name }}" value="{{ item.current_price|default:'' }}"
+                        placeholder="Price">
+                    {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+
+    </table>
+</div>

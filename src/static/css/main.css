@@ -31,3 +31,42 @@
     background-color: #701604;
     color: white;
 }
+
+/* Custom pill tab styling */
+.nav-pills .nav-link {
+    color: #701604;
+    border-radius: 0.375rem;
+    text-align: left;
+    justify-content: flex-start; /* aligns icon + text to the left */
+    padding-left: 1rem; /* optional: adds space from edge */
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #f3e6e2;
+    color: #701604;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #701604;
+    color: white;
+}
+
+
+/* Custom Albion table theme */
+.albion-table thead {
+    background-color: #B97A57;
+    color: white;
+}
+
+.albion-table th {
+    background-color: #B97A57;
+    color: white;
+    border-color: #B97A57;
+}
+
+.albion-table td {
+    border-color: #B97A57;
+}
+
+
+
