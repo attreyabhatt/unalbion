@@ -31,3 +31,7 @@ def floatval_class(value):
             return "secondary"
     except:
         return "secondary"
+
+@register.filter
+def split(value, delimiter="_"):
+    return value.split(delimiter)

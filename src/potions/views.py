@@ -6,6 +6,9 @@ from .models import PotionInput
 from .potion_recipes import potion_recipes
 from animal_artifacts.models import AnimalArtifactItem
 import json
+from django.http import JsonResponse
+from django.views.decorators.http import require_GET
+from collections import OrderedDict
 
 
 @login_required
@@ -19,6 +22,7 @@ def potion_calculator_view(request):
         updated_artifacts = []
         
         for key, value in request.POST.items():
+            print(key, value)  # Debugging output
             if key in ('csrfmiddlewaretoken', 'user', 'id'):
                 continue
                 
@@ -110,6 +114,15 @@ def potion_calculator_view(request):
                 potion_sale_fields.append(field)
             else:
                 ingredient_fields.append(field)
+
+    # Extract potion name from sale fields like "T4_HEALING_0"
+    potion_names_set = set()
+
+    for field in potion_sale_fields:
+        parts = field.name.split("_")
+        if len(parts) == 3:
+            potion_names_set.add(parts[1].capitalize())
+
     
     # Group ingredient fields by category
     herb_fields = [f for f in ingredient_fields if f.name in 
@@ -135,6 +148,9 @@ def potion_calculator_view(request):
         'all_artifacts': all_artifacts_for_display,
         'recipes_json': json.dumps(potion_recipes),
         'calculation_data_json': json.dumps(calculation_data),
+        'tiers': ["T2", "T3", "T4", "T5", "T6", "T7", "T8"],
+        'enchant_levels': ["0", "1", "2", "3"],
+        'potion_names': sorted(potion_names_set),
     }
     
     return render(request, 'potions/calculator.html', context)
@@ -165,22 +181,26 @@ def prepare_calculation_data(potion_input, artifacts_dict):
     }
 
 
-def get_recipe_cost(recipe, ingredient_prices):
-    """Calculate the cost of a recipe given ingredient prices"""
+def get_recipe_cost(recipe_data, ingredient_prices):
+    ingredients = recipe_data["ingredients"]
+    yield_qty = recipe_data.get("yield", 1)
+
     total_cost = 0
     missing_ingredients = []
-    
-    for ingredient_code, quantity in recipe:
+
+    for ingredient_code, quantity in ingredients:
         price = ingredient_prices.get(ingredient_code)
         if price is None:
             missing_ingredients.append(ingredient_code)
         else:
             total_cost += price * quantity
-    
+
     if missing_ingredients:
         return None, missing_ingredients
-    
-    return total_cost, []
+
+    cost_per_potion = total_cost / yield_qty
+    return round(cost_per_potion), []
+
 
 
 def format_potion_name(potion_code, enchant_level):
@@ -225,9 +245,41 @@ def get_user_artifact_prices(user):
     
     return {
         artifact.code_name: {
-            'price': artifact.market_price,
+            'market_price': artifact.market_price,
             'name': artifact.name,
             'type': artifact.artifact.artifact_type
         }
         for artifact in artifacts
     }
+
+
+@login_required
+@require_GET
+def potion_profit_api(request):
+    potion_input, _ = PotionInput.objects.get_or_create(user=request.user)
+    artifacts_dict = get_user_artifact_prices(request.user)
+
+    calc_data = prepare_calculation_data(potion_input, artifacts_dict)
+
+    profit_data = []
+
+    for potion_code, recipe in calc_data["recipes"].items():
+        cost, missing = get_recipe_cost(recipe, calc_data["ingredient_prices"])
+        if missing:
+            profit_data.append({
+                "potion_code": potion_code,
+                "status": "data_insufficient",
+                "missing": missing,
+                "recipe": recipe,
+            })
+        else:
+            profit_data.append({
+                "potion_code": potion_code,
+                "status": "ok",
+                "cost": cost,
+                "recipe": recipe,
+            })
+
+    return JsonResponse(profit_data, safe=False)
+
+

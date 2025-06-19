@@ -88,30 +88,69 @@
     </div>
     <div class="row mt-2">
         <div class="col-md-auto">
-        <h5 class="text-center">Schnapps / Brews</h5>
-        <div class="table-responsive">
-            <table class="table table-bordered text-center align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Name</th>
-                        <th>Market price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in schnapps_fields %}
-                    <tr>
-                        <td>{{ item.name|replace_underscore_with_space|title }}</td>
-                        <td>
-                            <input type="number" class="form-control form-control-sm ingredient-input"
-                                name="{{ item.name }}" value="{{ potion_input|getattribute:item.name|default:'' }}"
-                                data-ingredient="{{ item.name }}" placeholder="Price per unit">
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <h5 class="text-center">Schnapps / Brews</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered text-center align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Market price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in schnapps_fields %}
+                        <tr>
+                            <td>{{ item.name|replace_underscore_with_space|title }}</td>
+                            <td>
+                                <input type="number" class="form-control form-control-sm ingredient-input"
+                                    name="{{ item.name }}" value="{{ potion_input|getattribute:item.name|default:'' }}"
+                                    data-ingredient="{{ item.name }}" placeholder="Price per unit">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-auto">
+            <h5 class="text-center">Misc</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered text-center align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Market price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Used in crafting enchanted potions (+1, +2, +3). Required for accurate profit calculation.">
+                                    Animal Remains
+                                </span>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control form-control-sm ingredient-input"
+                                    name="animal_remains"
+                                    value="{{ potion_input|getattribute:'animal_remains'|default:'' }}"
+                                    data-ingredient="animal_remains" placeholder="Price per unit">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    </div>
-    
+
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>
