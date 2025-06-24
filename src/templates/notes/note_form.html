@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Note</title>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="Title" required>
+        <div id="editor" style="height: 300px;"></div>
+        <input type="hidden" name="content" id="hidden-content">
+        <button type="submit">Save</button>
+    </form>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script>
+        const quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+
+        const form = document.querySelector("form");
+        form.onsubmit = function() {
+            const contentInput = document.querySelector("#hidden-content");
+            contentInput.value = quill.root.innerHTML;
+        };
+    </script>
+</body>
+</html>

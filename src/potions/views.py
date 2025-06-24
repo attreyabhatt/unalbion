@@ -10,9 +10,11 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 from collections import OrderedDict
 
-
-@login_required
 def potion_calculator_view(request):
+
+    if not request.user.is_authenticated:
+        return render(request, "accounts/notloggedin.html") 
+       
     """Main potion profit calculator view"""
     potion_input, created = PotionInput.objects.get_or_create(user=request.user)
     

@@ -3,13 +3,33 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
         <!-- <a class="navbar-brand" href={% url 'home' %}> Unalbion </a> -->
-        <a class="navbar-brand" href={% url 'home' %}>
-            <img src="{% static 'images/logo5.png' %}" alt="Bootstrap" width="110">
+         <a class="navbar-brand" href={% url 'home' %}>
+            <img src="{% static 'images/logo5.png' %}" alt="Bootstrap" width="110"
+                class="d-inline-block align-text-top">
         </a>
+         <!-- <a class="navbar-brand" href={% url 'home' %}>
+            <img src="{% static 'images/just_name.png' %}" alt="Bootstrap" width="100"
+                class="d-inline-block align-text-top">
+        </a> -->
+        
+        
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <header class="d-flex justify-content-center py-2">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'note_list' %}" class="nav-link">Utilities</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                </ul>
+            </header>
+        </div> -->
+
 
         {% if user.is_authenticated %}
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -25,7 +45,7 @@
             <button class="btn albion-btn-outline" type="submit" name="logout-form">Logout</button>
         </form>
         {% else %}
-            {% include 'accounts/login.html' %}
+        {% include 'accounts/login.html' %}
         {% endif %}
 
     </div>

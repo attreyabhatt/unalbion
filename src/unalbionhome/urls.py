@@ -29,4 +29,5 @@ urlpatterns = [
     path('accounts/',login_signup_view,name='accounts'),
     path('fishing-bait/', fishing_profit_view, name='fishing_bait'),
     path('potions/', include('potions.urls')),
+    path('notes/', include('notes.urls')),
 ]
