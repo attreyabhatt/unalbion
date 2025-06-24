@@ -7,6 +7,16 @@
         "wdth" 100;
 }
 
+html, body {
+    height: 100%;
+}
+
+.roboto-albion {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .albion-btn {
     background-color: #701604;
     color: #fff;

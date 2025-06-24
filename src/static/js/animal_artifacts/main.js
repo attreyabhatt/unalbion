@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("animal_artifacts_form");
     const profitTableBody = document.querySelector("#profit-table tbody");
-    const profitToggle = document.getElementById("profitToggle");
 
-    if (!form || !profitTableBody || !profitToggle) return;
+    if (!form || !profitTableBody) return;
 
     const inputs = form.querySelectorAll("input[type='number']");
 
@@ -92,20 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 addProfitRow(profitTableBody, "T7 → T3", profit73, isFirstRow, name);
             }
         }
-
-        applyProfitFilter();
-    }
-
-    function applyProfitFilter() {
-        const showOnlyProfitable = profitToggle.checked;
-        const rows = document.querySelectorAll("#profit-table tbody tr");
-
-        rows.forEach(row => {
-            if (!row.hasAttribute("data-profit")) return; // skip spacer rows
-
-            const profit = parseFloat(row.getAttribute("data-profit"));
-            row.style.display = (showOnlyProfitable && profit <= 0) ? "none" : "";
-        });
     }
 
     // Bootstrap icon link (if not already added)
@@ -119,5 +104,4 @@ document.addEventListener("DOMContentLoaded", function () {
     // Events
     calculateProfits();
     inputs.forEach((input) => input.addEventListener("input", calculateProfits));
-    profitToggle.addEventListener("change", applyProfitFilter);
 });

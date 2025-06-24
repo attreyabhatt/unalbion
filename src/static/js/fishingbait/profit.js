@@ -19,47 +19,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let hasAny = false;
 
-        if (t1Input.value.trim() !== "") {
-            const t1 = parseInt(t1Input.value);
-            if (!isNaN(t1)) {
-                const profit = t1 - (worm * 1);
-                profitT1.textContent = profit;
+        function setProfitDisplay(element, value, cost) {
+            if (!isNaN(value)) {
+                const profit = value - cost;
+                element.textContent = profit;
+
+                element.classList.remove("text-success", "text-danger");
+
+                if (profit > 0) {
+                    element.classList.add("text-success");
+                } else if (profit < 0) {
+                    element.classList.add("text-danger");
+                }
+
                 hasAny = true;
             } else {
-                profitT1.textContent = "No data";
+                element.textContent = "No data";
+                element.classList.remove("text-success", "text-danger");
             }
+        }
+
+        if (t1Input.value.trim() !== "") {
+            const t1 = parseInt(t1Input.value);
+            setProfitDisplay(profitT1, t1, worm * 1);
         } else {
             profitT1.textContent = "No data";
+            profitT1.classList.remove("text-success", "text-danger");
         }
 
         if (t3Input.value.trim() !== "") {
             const t3 = parseInt(t3Input.value);
-            if (!isNaN(t3)) {
-                const profit = t3 - (worm * 3);
-                profitT3.textContent = profit;
-                hasAny = true;
-            } else {
-                profitT3.textContent = "No data";
-            }
+            setProfitDisplay(profitT3, t3, worm * 5);
         } else {
             profitT3.textContent = "No data";
+            profitT3.classList.remove("text-success", "text-danger");
         }
 
         if (t5Input.value.trim() !== "") {
             const t5 = parseInt(t5Input.value);
-            if (!isNaN(t5)) {
-                const profit = t5 - (worm * 5);
-                profitT5.textContent = profit;
-                hasAny = true;
-            } else {
-                profitT5.textContent = "No data";
-            }
+            setProfitDisplay(profitT5, t5, worm * 25);
         } else {
             profitT5.textContent = "No data";
+            profitT5.classList.remove("text-success", "text-danger");
         }
 
         outputSection.style.display = hasAny ? "block" : "none";
     }
+
 
     // Listen for input changes
     [wormInput, t1Input, t3Input, t5Input].forEach(input => {
