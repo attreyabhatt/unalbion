@@ -137,6 +137,7 @@ def potion_calculator_view(request):
     
     # Prepare data for frontend calculations
     calculation_data = prepare_calculation_data(potion_input, artifacts_dict)
+    print(calculation_data)
     
     context = {
         'potion_input': potion_input,

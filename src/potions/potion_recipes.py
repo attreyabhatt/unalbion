@@ -40,7 +40,7 @@ _raw_potion_recipes = {
     "T8_POISON_0": [("yarrow", 72), ("teasel", 36), ("mullein", 36), ("cow_milk", 18), ("pumpkin_moonshine", 18)],
     "T8_GATHERING_0": [("t7runestone", 1), ("yarrow", 72), ("cow_butter", 144), ("mullein", 72), ("foxglove", 36), ("pumpkin_moonshine", 36)],
     "T8_HELLFIRE_0": [("t7imp", 1), ("yarrow", 72), ("cow_milk", 144), ("mullein", 72), ("goose_eggs", 36), ("pumpkin_moonshine", 36)],
-    "T8_TORNADO_0": [("t7dawn", 1), ("yarrow", 144), ("mullein", 72), ("corn_hooch", 72), ("goose_egg", 36), ("pumpkin_moonshine", 36)],
+    "T8_TORNADO_0": [("t7dawn", 1), ("yarrow", 144), ("mullein", 72), ("corn_hooch", 72), ("goose_eggs", 36), ("pumpkin_moonshine", 36)],
 }
 
 # Build enhanced recipe dict with yield info
