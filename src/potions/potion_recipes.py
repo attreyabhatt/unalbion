@@ -43,13 +43,64 @@ _raw_potion_recipes = {
     "T8_TORNADO_0": [("t7dawn", 1), ("yarrow", 144), ("mullein", 72), ("corn_hooch", 72), ("goose_eggs", 36), ("pumpkin_moonshine", 36)],
 }
 
-# Build enhanced recipe dict with yield info
+_potion_extracts = {
+    "T2_ENERGY": 5,
+    "T2_HEALING": 5,
+    "T3_GIGANTIFY": 5,
+    "T3_RESISTANCE": 5,
+    "T3_STICKY": 5,
+    "T3_ACID": 10,
+    "T3_CALMING": 10,
+    "T3_CLEANSING": 10,
+    "T4_BERSERK": 10,
+    "T4_POISON": 5,
+    "T4_ENERGY": 15,
+    "T4_GATHERING": 10,
+    "T4_HEALING": 15,
+    "T4_HELLFIRE": 10,
+    "T4_TORNADO": 10,
+    "T5_ACID": 30,
+    "T5_CLEANSING": 30,
+    "T5_CALMING": 30,
+    "T5_GIGANTIFY": 15,
+    "T5_STICKY": 15,
+    "T5_RESISTANCE": 15,
+    "T6_BERSERK": 30,
+    "T6_POISON": 15,
+    "T6_ENERGY": 45,
+    "T6_GATHERING": 30,
+    "T6_HEALING": 45,
+    "T6_HELLFIRE": 30,
+    "T6_TORNADO": 30,
+    "T7_ACID": 90,
+    "T7_CLEANSING": 90,
+    "T7_CALMING": 90,
+    "T7_GIGANTIFY": 45,
+    "T7_STICKY": 45,
+    "T7_RESISTANCE": 45,
+    "T8_BERSERK": 90,
+    "T8_INVISIBILITY": 45,
+    "T8_POISON": 45,
+    "T8_GATHERING": 90,
+    "T8_HELLFIRE": 90,
+    "T8_TORNADO": 90
+}
+
 potion_recipes = {}
 
 for code, ingredients in _raw_potion_recipes.items():
     has_artifact = any(ing[0].startswith(("t3", "t4", "t5", "t6", "t7", "t8")) for ing in ingredients)
     yield_qty = 10 if has_artifact else 5
-    potion_recipes[code] = {
+
+    recipe = {
         "ingredients": ingredients,
-        "yield": yield_qty
+        "yield": yield_qty,
     }
+
+    # Only add extracts for base enchant version (_0)
+    if code.endswith("_0"):
+        tier_name_key = code.rsplit("_", 1)[0]  # e.g. "T6_POISON"
+        recipe["extracts"] = _potion_extracts.get(tier_name_key, 0)
+
+    potion_recipes[code] = recipe
+

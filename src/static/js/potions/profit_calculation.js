@@ -105,8 +105,16 @@ window.renderProfitTable = function () {
             row.setAttribute("data-enchant", enchant.toString());
             row.setAttribute("data-name", name.toLowerCase());
 
-            const enchantMultiplier = [0, 45, 135, 405][enchant];
-            const totalCost = Math.round((baseTotal + enchantMultiplier * animalRemainsPrice) / yieldQty);
+            // Lookup extract count from base recipe (_0)
+            const baseKey = `${tier}_${name.toUpperCase()}_0`;
+            const extractCount = recipes[baseKey]?.extracts || 0;
+
+            // Enchant cost per extract
+            const extractCostMultiplier = [0, 1, 3, 9][enchant];
+            const enchantCost = extractCount * extractCostMultiplier * animalRemainsPrice;
+
+            // Total per-potion cost
+            const totalCost = Math.round((baseTotal + enchantCost) / yieldQty);
             const salePrice = getSalePrice(enchantCode);
             const profit = salePrice !== null ? salePrice - totalCost : null;
 
@@ -120,8 +128,8 @@ window.renderProfitTable = function () {
                 const profitCell = createCell(Math.round(profit));
                 profitCell.className =
                     profit > 0 ? "text-success" :
-                    profit < 0 ? "text-danger" :
-                    "text-secondary";
+                        profit < 0 ? "text-danger" :
+                            "text-secondary";
                 row.appendChild(profitCell);
             } else {
                 row.appendChild(createCell("—"));
@@ -130,6 +138,7 @@ window.renderProfitTable = function () {
 
             tbody.appendChild(row);
         }
+
     });
 
     filterProfitRows(); // Apply filters on load
