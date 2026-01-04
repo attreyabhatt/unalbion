@@ -12,36 +12,26 @@
             </tr>
         </thead>
         <tbody>
-            {% regroup all_artifacts by name as artifact_list %}
-            {% for group in artifact_list %}
+            {% for item in artifact_items %}
             <tr>
-                <td>{{ group.grouper }}</td>
+                <td>{{ item.name }}</td>
                 <td>
-                    {% for item in group.list %}
-                    {% if item.artifact_type == "Rugged" %}
                     <input type="number" class="form-control form-control-sm ingredient-input"
-                        name="artifact_{{ item.code_name }}" value="{{ item.current_price|default:'' }}"
+                        name="artifact_{{ item.id }}_{{ artifact_tiers.0 }}"
+                        value="{{ artifact_prices_by_item|get_item:item.id|get_item:artifact_tiers.0|default:'' }}"
                         placeholder="Price">
-                    {% endif %}
-                    {% endfor %}
                 </td>
                 <td>
-                    {% for item in group.list %}
-                    {% if item.artifact_type == "Fine" %}
                     <input type="number" class="form-control form-control-sm ingredient-input"
-                        name="artifact_{{ item.code_name }}" value="{{ item.current_price|default:'' }}"
+                        name="artifact_{{ item.id }}_{{ artifact_tiers.1 }}"
+                        value="{{ artifact_prices_by_item|get_item:item.id|get_item:artifact_tiers.1|default:'' }}"
                         placeholder="Price">
-                    {% endif %}
-                    {% endfor %}
                 </td>
                 <td>
-                    {% for item in group.list %}
-                    {% if item.artifact_type == "Excellent" %}
                     <input type="number" class="form-control form-control-sm ingredient-input"
-                        name="artifact_{{ item.code_name }}" value="{{ item.current_price|default:'' }}"
+                        name="artifact_{{ item.id }}_{{ artifact_tiers.2 }}"
+                        value="{{ artifact_prices_by_item|get_item:item.id|get_item:artifact_tiers.2|default:'' }}"
                         placeholder="Price">
-                    {% endif %}
-                    {% endfor %}
                 </td>
             </tr>
             {% endfor %}

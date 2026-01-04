@@ -33,22 +33,19 @@ Unalbion - Animal Artifacts
                     </tr>
                 </thead>
                 <tbody>
-                    {% for name, items_by_tier in grouped_items.items %}
+                    {% for item in items %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td><strong>{{ name }}</strong></td>
-                        {% for tier in artifact_types %}
+                        <td><strong>{{ item.name }}</strong></td>
+                        {% for tier in artifact_tiers %}
                         <td>
-                            {% with item=items_by_tier|get_item:tier %}
-                            {% if item %}
-                            <input type="number" class="form-control form-control-sm" id="{{ item.code_name }}"
-                                name="{{ item.code_name }}" placeholder="Enter Price"
-                                value="{{ item.market_price|default:'' }}" data-name="{{ item.name }}"
-                                data-tier="T{{ item.artifact.get_artifact_type_display|slice:':1' }} {{ item.artifact.get_artifact_type_display }}">
-                            {% else %}
-                            <span class="text-muted">–</span>
-                            {% endif %}
-                            {% endwith %}
+                            <input type="number" class="form-control form-control-sm"
+                                id="artifact_{{ item.id }}_{{ tier }}"
+                                name="artifact_{{ item.id }}_{{ tier }}"
+                                placeholder="Enter Price"
+                                value="{{ prices_by_item|get_item:item.id|get_item:tier|default:'' }}"
+                                data-name="{{ item.name }}"
+                                data-tier="{{ tier }}">
                         </td>
                         {% endfor %}
                     </tr>
@@ -80,7 +77,30 @@ Unalbion - Animal Artifacts
             <thead class="table-dark">
                 <tr>
                     <th scope="col">Animal Name</th>
-                    <th scope="col">From → To</th>
+                    <th scope="col">
+                        Breakdown
+                        <button type="button" class="btn btn-sm btn-outline-secondary ms-1 py-0 px-1"
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="How the higher tier artifact is split into lower tiers.">
+                            i
+                        </button>
+                    </th>
+                    <th scope="col">
+                        Revenue
+                        <button type="button" class="btn btn-sm btn-outline-secondary ms-1 py-0 px-1"
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Total silver earned from selling the resulting lower tier artifacts.">
+                            i
+                        </button>
+                    </th>
+                    <th scope="col">
+                        Cost
+                        <button type="button" class="btn btn-sm btn-outline-secondary ms-1 py-0 px-1"
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Purchase price of the higher tier artifact before breaking it down.">
+                            i
+                        </button>
+                    </th>
                     <th scope="col">Profit (Silver)</th>
                 </tr>
             </thead>
@@ -134,4 +154,12 @@ Unalbion - Animal Artifacts
 </div>
 
 <script src="{% static 'js/animal_artifacts/main.js' %}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>
 {% endblock content %}

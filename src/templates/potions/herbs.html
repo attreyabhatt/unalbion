@@ -10,11 +10,14 @@
             </tr>
         </thead>
         <tbody>
-            {% for herb in herb_fields %}
+            {% for herb in herb_ingredients %}
             <tr>
-                <td>{{herb.help_text}}</td>
-                <td> <input type="number" class="form-control form-control-sm ingredient-input" name="{{ herb.name }}"
-                        value="{{ potion_input|getattribute:herb.name|default:'' }}" data-ingredient="{{ herb.name }}"
+                <td>{{ herb.name }}</td>
+                <td>
+                    <input type="number" class="form-control form-control-sm ingredient-input"
+                        name="ingredient_{{ herb.id }}"
+                        value="{{ ingredient_prices|get_item:herb.code|default:'' }}"
+                        data-ingredient="{{ herb.code }}"
                         placeholder="Price per unit"></td>
             </tr>
             {% endfor %}

@@ -47,7 +47,7 @@ window.renderProfitTable = function () {
     }
 
     function getSalePrice(code) {
-        const input = document.querySelector(`[name="${code}"]`);
+        const input = document.querySelector(`[data-potion-code="${code}"]`);
         if (input && input.value) {
             const val = parseInt(input.value);
             return isNaN(val) ? null : val;

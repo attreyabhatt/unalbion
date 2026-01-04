@@ -20,6 +20,12 @@ def replace_underscore_with_space(value):
     return value.replace('_', ' ')
 
 @register.filter
+def get_item(dictionary, key):
+    if dictionary is None:
+        return None
+    return dictionary.get(key)
+
+@register.filter
 def floatval_class(value):
     try:
         val = float(value)

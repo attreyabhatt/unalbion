@@ -1,9 +1,8 @@
 # potions/utils.py
 
-from .models import PotionInput
 from .potion_recipes import potion_recipes
 
-def calculate_production_costs_enchant_0(potion_input):
+def calculate_production_costs_enchant_0(ingredient_prices):
     results = []
 
     for code, recipe in potion_recipes.items():
@@ -11,7 +10,7 @@ def calculate_production_costs_enchant_0(potion_input):
         missing = []
 
         for ingredient, qty in recipe["ingredients"]:
-            value = getattr(potion_input, ingredient, None)
+            value = ingredient_prices.get(ingredient)
             if value is None:
                 missing.append(ingredient)
             else:

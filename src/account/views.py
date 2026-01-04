@@ -26,7 +26,13 @@ def login_signup_view(request):
                     login(request, user)
                     return redirect(next_url)
                 else:
-                    user = User.objects.create_user(username=username, password='')
+                    if User.objects.filter(username=username).exists():
+                        return render(request, 'home.html', {
+                            'error': 'This username is reserved. Please choose another.'
+                        })
+                    user = User.objects.create_user(username=username)
+                    user.set_unusable_password()
+                    user.save(update_fields=["password"])
                     login(request, user, backend='django.contrib.auth.backends.ModelBackend')
                     return redirect(next_url)
 

@@ -39,21 +39,20 @@
             </tr>
         </thead>
         <tbody>
-            {% for field in potion_sale_fields %}
-            {% with parts=field.name|split:"_" %}
-            {% if parts|length == 3 %}
-            <tr data-tier="{{ parts.0 }}" data-enchant="{{ parts.2 }}" data-name="{{ parts.1|lower }}">
-                <td>{{ parts.1|title }} Potion</td>
-                <td>{{ parts.0 }}</td>
-                <td>+{{ parts.2 }}</td>
+            {% for potion in potion_variants %}
+            <tr data-tier="T{{ potion.tier }}" data-enchant="{{ potion.enchant }}" data-name="{{ potion.name|lower }}">
+                <td>{{ potion.name }} Potion</td>
+                <td>T{{ potion.tier }}</td>
+                <td>+{{ potion.enchant }}</td>
                 <td>
-                    <input type="number" class="form-control form-control-sm sale-price-input" id="price_{{ field.name }}"
-                        name="{{ field.name }}" value="{{ potion_input|getattribute:field.name|default:'' }}"
+                    <input type="number" class="form-control form-control-sm sale-price-input"
+                        id="price_{{ potion.code }}"
+                        name="potion_{{ potion.id }}"
+                        data-potion-code="{{ potion.code }}"
+                        value="{{ potion_price_map|get_item:potion.code|default:'' }}"
                         placeholder="Enter price">
                 </td>
             </tr>
-            {% endif %}
-            {% endwith %}
             {% endfor %}
         </tbody>
     </table>

@@ -14,14 +14,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for item in animal_fields %}
-                    {% if "_milk" in item.name %}
+                    {% for item in animal_ingredients %}
+                    {% if "_milk" in item.code %}
                     <tr>
-                        <td>{{ item.name|replace:"_milk,"|replace_underscore_with_space|title }}</td>
+                        <td>{{ item.name }}</td>
                         <td>
                             <input type="number" class="form-control form-control-sm ingredient-input"
-                                name="{{ item.name }}" value="{{ potion_input|getattribute:item.name|default:'' }}"
-                                data-ingredient="{{ item.name }}" placeholder="Price per unit">
+                                name="ingredient_{{ item.id }}"
+                                value="{{ ingredient_prices|get_item:item.code|default:'' }}"
+                                data-ingredient="{{ item.code }}" placeholder="Price per unit">
                         </td>
                     </tr>
                     {% endif %}
@@ -42,14 +43,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for item in animal_fields %}
-                    {% if "_butter" in item.name %}
+                    {% for item in animal_ingredients %}
+                    {% if "_butter" in item.code %}
                     <tr>
-                        <td>{{ item.name|replace:"_butter,"|replace_underscore_with_space|title }}</td>
+                        <td>{{ item.name }}</td>
                         <td>
                             <input type="number" class="form-control form-control-sm ingredient-input"
-                                name="{{ item.name }}" value="{{ potion_input|getattribute:item.name|default:'' }}"
-                                data-ingredient="{{ item.name }}" placeholder="Price per unit">
+                                name="ingredient_{{ item.id }}"
+                                value="{{ ingredient_prices|get_item:item.code|default:'' }}"
+                                data-ingredient="{{ item.code }}" placeholder="Price per unit">
                         </td>
                     </tr>
                     {% endif %}
@@ -70,14 +72,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for item in animal_fields %}
-                    {% if "_eggs" in item.name %}
+                    {% for item in animal_ingredients %}
+                    {% if "_eggs" in item.code %}
                     <tr>
-                        <td>{{ item.name|replace:"_eggs,"|replace_underscore_with_space|title }}</td>
+                        <td>{{ item.name }}</td>
                         <td>
                             <input type="number" class="form-control form-control-sm ingredient-input"
-                                name="{{ item.name }}" value="{{ potion_input|getattribute:item.name|default:'' }}"
-                                data-ingredient="{{ item.name }}" placeholder="Price per unit">
+                                name="ingredient_{{ item.id }}"
+                                value="{{ ingredient_prices|get_item:item.code|default:'' }}"
+                                data-ingredient="{{ item.code }}" placeholder="Price per unit">
                         </td>
                     </tr>
                     {% endif %}
@@ -98,13 +101,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for item in schnapps_fields %}
+                        {% for item in schnapps_ingredients %}
                         <tr>
-                            <td>{{ item.name|replace_underscore_with_space|title }}</td>
+                            <td>{{ item.name }}</td>
                             <td>
                                 <input type="number" class="form-control form-control-sm ingredient-input"
-                                    name="{{ item.name }}" value="{{ potion_input|getattribute:item.name|default:'' }}"
-                                    data-ingredient="{{ item.name }}" placeholder="Price per unit">
+                                    name="ingredient_{{ item.id }}"
+                                    value="{{ ingredient_prices|get_item:item.code|default:'' }}"
+                                    data-ingredient="{{ item.code }}" placeholder="Price per unit">
                             </td>
                         </tr>
                         {% endfor %}
@@ -124,20 +128,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for item in other_ingredients %}
                         <tr>
                             <td>
                                 <span data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Used in crafting enchanted potions (+1, +2, +3). Required for accurate profit calculation.">
-                                    Animal Remains
+                                    {{ item.name }}
                                 </span>
                             </td>
                             <td>
                                 <input type="number" class="form-control form-control-sm ingredient-input"
-                                    name="animal_remains"
-                                    value="{{ potion_input|getattribute:'animal_remains'|default:'' }}"
-                                    data-ingredient="animal_remains" placeholder="Price per unit">
+                                    name="ingredient_{{ item.id }}"
+                                    value="{{ ingredient_prices|get_item:item.code|default:'' }}"
+                                    data-ingredient="{{ item.code }}" placeholder="Price per unit">
                             </td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
