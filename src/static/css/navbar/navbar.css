@@ -6,7 +6,22 @@
     transform: scale(1.05);
 }
 
-.navbar {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
+.ua-nav {
+    font-family: var(--font-body);
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid rgba(28, 26, 23, 0.08);
+}
+
+.ua-nav .nav-link {
+    color: var(--ink);
+    font-weight: 600;
+}
+
+.ua-nav .nav-link.active {
+    color: var(--ember-dark);
+}
+
+.ua-nav .navbar-toggler {
+    border: none;
 }

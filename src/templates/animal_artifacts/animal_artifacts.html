@@ -9,7 +9,7 @@ Unalbion - Animal Artifacts
 {% load static %}
 {% load get_item %}
 
-<div class="container">
+<div class="container ua-reveal">
     <div class="row mb-3 mt-3">
         <div class="col-md-12">
             <h1>Animal Artifacts</h1>
@@ -20,7 +20,7 @@ Unalbion - Animal Artifacts
     <form id="animal_artifacts_form" name="animal_artifacts_form" method="POST" action="{% url 'animal_artifacts' %}">
         {% csrf_token %}
 
-        <div class="table-responsive card p-3 shadow-sm mb-4">
+        <div class="table-responsive ua-section mb-4">
             <table class="table table-hover table-bordered table-striped align-middle" id="animal-artifacts-table">
                 <caption class="text-muted">Enter the current market price of each animal artifact</caption>
                 <thead class="table-dark">
@@ -56,13 +56,13 @@ Unalbion - Animal Artifacts
 
         <div class="row justify-content-end mt-3">
             <div class="col-md-auto mb-1">
-                <a href="#profit-section" class="btn albion-btn px-4" id="see-profit-btn">
+                <a href="#profit-section" class="btn ua-btn-primary px-4" id="see-profit-btn">
                     See Profit
                 </a>
 
             </div>
             <div class="col-md-auto">
-                <button type="submit" class="btn albion-btn px-4" id="calculate-profit-btn">
+                <button type="submit" class="btn ua-btn-primary px-4" id="calculate-profit-btn">
                     Save this data
                 </button>
             </div>
@@ -71,7 +71,7 @@ Unalbion - Animal Artifacts
 
     <h4 class="mt-5" id="profit-section">Profit Table</h4>
 
-    <div class="table-responsive card p-3 shadow-sm" id="profit-table-container">
+    <div class="table-responsive ua-section" id="profit-table-container">
         <table class="table table-hover table-bordered table-striped align-middle" id="profit-table">
             <caption class="text-muted">Calculated profit between artifact tiers</caption>
             <thead class="table-dark">

@@ -10,61 +10,92 @@ Unalbion - Earn Silver with Crafting
 {% endblock extra_head %}
 
 {% block content %}
-<div class="container pb-5 pt-3" id="profit-methods">
-    <div class="text-center mb-5">
-        <h2 class="fw-bold">Choose Your Profit Method</h2>
-        <p class="text-muted">Craft, cook, or break down artifacts for maximum silver.</p>
-        <hr class="w-25 mx-auto">
-    </div>
-
-    <div class="row justify-content-center g-4">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
-            <div class="card profit-card">
-                <img src="https://render.albiononline.com/v1/item/Excellent%20Spirit%20Paws@0.png?locale=en"
-                     class="card-img-top img-thumbnail card-img-responsive" alt="Animal Artifacts">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Animal Artifacts</h5>
-                    <p class="card-text text-muted">Break down artifacts into lower tiers to earn profit.</p>
-                    <a href="{% url 'animal_artifacts' %}" class="btn btn-danger w-100 mt-2">Calculate</a>
+<div class="container pb-5 pt-4" id="profit-methods">
+    <section class="ua-hero ua-reveal">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <span class="ua-pill mb-3">Live market inputs. Fast profit reads.</span>
+                <h1 class="ua-hero-title">Uncover the silver paths hiding in your crafting bench.</h1>
+                <p class="ua-hero-sub mt-3">
+                    Unalbion turns prices into actionable margins. Track inputs, preview outputs, and
+                    decide what is worth crafting today.
+                </p>
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <a href="{% url 'potion_calculator' %}" class="btn ua-btn-primary">Start with potions</a>
+                    <a href="{% url 'animal_artifacts' %}" class="btn ua-btn-ghost">Check artifact splits</a>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card ua-card p-3">
+                    <img src="https://render.albiononline.com/v1/item/Healing%20Potion.png?locale=en"
+                         class="card-img-top card-img-responsive" alt="Potions">
+                    <div class="p-3">
+                        <h5 class="card-title">Daily crafting pulse</h5>
+                        <p class="text-muted mb-0">Snapshot the best margins across tiers and enchantments.</p>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
-            <div class="card profit-card">
-                <img src="https://render.albiononline.com/v1/item/Special%20Fish%20Bait.png?locale=en"
-                     class="card-img-top img-thumbnail card-img-responsive" alt="Fishing Bait">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Fishing Bait</h5>
-                    <p class="card-text text-muted">Convert worms into fishing baits for silver.</p>
-                    <a href="{% url 'fishing_bait' %}" class="btn btn-danger w-100 mt-2">Calculate</a>
+    <section class="ua-section mt-5 ua-reveal delay-2">
+        <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+            <div>
+                <h2 class="fw-bold mb-1">Pick your profit method</h2>
+                <p class="text-muted mb-0">Each calculator focuses on a different silver strategy.</p>
+            </div>
+            <span class="text-muted">More tools coming soon.</span>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-12 col-sm-6 col-lg-3 ua-reveal delay-1">
+                <div class="card ua-card h-100">
+                    <img src="https://render.albiononline.com/v1/item/Excellent%20Spirit%20Paws@0.png?locale=en"
+                         class="card-img-top card-img-responsive" alt="Animal Artifacts">
+                    <div class="card-body">
+                        <h5 class="card-title">Animal Artifacts</h5>
+                        <p class="card-text text-muted">Break down artifacts into lower tiers to earn profit.</p>
+                        <a href="{% url 'animal_artifacts' %}" class="btn ua-btn-primary w-100 mt-2">Calculate</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-3 ua-reveal delay-2">
+                <div class="card ua-card h-100">
+                    <img src="https://render.albiononline.com/v1/item/Special%20Fish%20Bait.png?locale=en"
+                         class="card-img-top card-img-responsive" alt="Fishing Bait">
+                    <div class="card-body">
+                        <h5 class="card-title">Fishing Bait</h5>
+                        <p class="card-text text-muted">Convert worms into fishing baits for silver.</p>
+                        <a href="{% url 'fishing_bait' %}" class="btn ua-btn-primary w-100 mt-2">Calculate</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-3 ua-reveal delay-3">
+                <div class="card ua-card h-100">
+                    <img src="https://render.albiononline.com/v1/item/Healing%20Potion.png?locale=en"
+                         class="card-img-top card-img-responsive" alt="Potions">
+                    <div class="card-body">
+                        <h5 class="card-title">Potions</h5>
+                        <p class="card-text text-muted">Craft ingredients into potions profitably.</p>
+                        <a href="{% url 'potion_calculator' %}" class="btn ua-btn-primary w-100 mt-2">Calculate</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-3 ua-reveal delay-4">
+                <div class="card ua-card h-100">
+                    <img src="https://render.albiononline.com/v1/item/Pork%20Pie.png?locale=en"
+                         class="card-img-top card-img-responsive" alt="Cooking">
+                    <div class="card-body">
+                        <h5 class="card-title">Cooking</h5>
+                        <p class="card-text text-muted">Become a chef and turn food into profit.</p>
+                        <a href="#" class="btn ua-btn-ghost w-100 mt-2" disabled>Coming Soon</a>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
-            <div class="card profit-card">
-                <img src="https://render.albiononline.com/v1/item/Healing%20Potion.png?locale=en"
-                     class="card-img-top img-thumbnail card-img-responsive" alt="Potions">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Potions</h5>
-                    <p class="card-text text-muted">Craft ingredients into potions profitably.</p>
-                    <a href="{% url 'potion_calculator' %}" class="btn btn-danger w-100 mt-2">Calculate</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
-            <div class="card profit-card">
-                <img src="https://render.albiononline.com/v1/item/Pork%20Pie.png?locale=en"
-                     class="card-img-top img-thumbnail card-img-responsive" alt="Cooking">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Cooking</h5>
-                    <p class="card-text text-muted">Become a chef and turn food into profit.</p>
-                    <a href="#" class="btn btn-outline-secondary w-100 mt-2" disabled>Coming Soon</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 </div>
 {% endblock content %}

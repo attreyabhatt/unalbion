@@ -26,15 +26,15 @@
     }
 </style>
 
-<div class="container mt-4 mb-3">
+<div class="container mt-4 mb-3 ua-section ua-reveal">
     <form id="potion-input-form" method="POST">
         {% csrf_token %}
         <div class="p-2 mb-2 bg-white">
-            <h2 class="mb-2">🎯 Potion Profit Calculator</h2>
+            <h2 class="mb-2">Potion Profit Calculator</h2>
 
             <a class="how-it-works-toggle" data-bs-toggle="collapse" href="#howItWorks" role="button"
                 aria-expanded="false" aria-controls="howItWorks">
-                🛈 How does this work?
+                How does this work?
             </a>
 
 
@@ -47,17 +47,17 @@
                     inputs.
                 </p>
                 <ul class="small text-muted">
-                    <li>📦 Prices are saved to your account so you don’t need to re-enter them each time.</li>
-                    <li>💡 Enchanted versions of potions (+1, +2, +3) are auto-calculated using artifact costs.</li>
-                    <li>🧪 If a sale price is not entered, only the crafting cost will be shown.</li>
-                    <li>⚠️ “Data Insufficient” will appear if any required ingredient price is missing.</li>
+                    <li> Prices are saved to your account so you don't need to re-enter them each time.</li>
+                    <li> Enchanted versions of potions (+1, +2, +3) are auto-calculated using artifact costs.</li>
+                    <li> If a sale price is not entered, only the crafting cost will be shown.</li>
+                    <li> Data Insufficient will appear if any required ingredient price is missing.</li>
                 </ul>
             </div>
         </div>
 </div>
 
 
-<div class="container mt-4">
+<div class="container mt-4 ua-reveal delay-1">
     <div class="row">
         <!-- Vertical Nav Tabs -->
         <div class="col-md-3 mb-3">
@@ -65,28 +65,28 @@
                 <div class="nav flex-column nav-pills" id="v-potion-tabs" role="tablist" aria-orientation="vertical">
                     <button class="nav-link active" id="herbs-tab" data-bs-toggle="pill" data-bs-target="#herbs"
                         type="button" role="tab" aria-controls="herbs" aria-selected="true">
-                        🌿 Herbs
+                        Herbs
                     </button>
                     <button class="nav-link" id="artifacts-tab" data-bs-toggle="pill" data-bs-target="#artifacts"
                         type="button" role="tab" aria-controls="artifacts" aria-selected="false">
-                        🦴 Animal Artifacts
+                        Animal Artifacts
                     </button>
                     <button class="nav-link" id="products-tab" data-bs-toggle="pill" data-bs-target="#products"
                         type="button" role="tab" aria-controls="products" aria-selected="false">
-                        🥛 Animal Products & Brews
+                        Animal Products & Brews
                     </button>
                     <button class="nav-link" id="sale-tab" data-bs-toggle="pill" data-bs-target="#sale" type="button"
                         role="tab" aria-controls="sale" aria-selected="false">
-                        💰 Potion Sale Prices
+                        Potion Sale Prices
                     </button>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="mt-4 d-flex gap-3">
-                        <button type="submit" id="save-data-btn" class="btn btn-success"
+                        <button type="submit" id="save-data-btn" class="btn ua-btn-primary"
                             data-url="{% url 'potion_calculator' %}">Save Data</button>
-                        <button type="button" id="show-profit-btn" class="btn btn-outline-primary">📊 Show Profits</button>
+                        <button type="button" id="show-profit-btn" class="btn ua-btn-ghost">Show Profits</button>
                     </div>
                 </div>
             </div>
@@ -125,7 +125,7 @@
         aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                ✅ Data saved successfully!
+                Data saved successfully!
             </div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
                 aria-label="Close"></button>

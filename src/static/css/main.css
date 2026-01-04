@@ -1,82 +1,224 @@
-.roboto-albion {
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
+:root {
+    --ink: #1c1a17;
+    --ink-soft: #2f2a24;
+    --sand: #f4efe7;
+    --clay: #e7d7c6;
+    --ember: #c6481e;
+    --ember-dark: #9f3514;
+    --teal: #1f7a73;
+    --gold: #d6a14a;
+    --card: #fffdf9;
+    --shadow: 0 12px 30px rgba(28, 26, 23, 0.12);
+    --shadow-soft: 0 8px 20px rgba(28, 26, 23, 0.08);
+    --font-body: "Space Grotesk", sans-serif;
+    --font-display: "Sora", sans-serif;
 }
 
 html, body {
     height: 100%;
 }
 
-.roboto-albion {
-    display: flex;
-    flex-direction: column;
+.ua-body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    background-color: var(--sand);
+    background-image:
+        radial-gradient(circle at 10% 10%, rgba(214, 161, 74, 0.18), transparent 45%),
+        radial-gradient(circle at 90% 0%, rgba(31, 122, 115, 0.18), transparent 40%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(244, 239, 231, 0.96));
     min-height: 100vh;
 }
 
-.albion-btn {
-    background-color: #701604;
+.ua-footer {
+    border-top: 1px solid rgba(28, 26, 23, 0.08);
+    background: rgba(255, 255, 255, 0.7);
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    color: var(--ink);
+}
+
+main.container {
+    max-width: 1200px;
+}
+
+.ua-section {
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: var(--shadow-soft);
+    padding: 2rem;
+    backdrop-filter: blur(8px);
+}
+
+.ua-hero {
+    border-radius: 28px;
+    padding: 3rem 2.5rem;
+    background:
+        linear-gradient(135deg, rgba(198, 72, 30, 0.08), rgba(31, 122, 115, 0.08)),
+        radial-gradient(circle at 15% 20%, rgba(214, 161, 74, 0.25), transparent 45%),
+        var(--card);
+    box-shadow: var(--shadow);
+}
+
+.ua-hero-title {
+    font-size: clamp(2rem, 2.4vw + 1.6rem, 3.6rem);
+    letter-spacing: -0.02em;
+}
+
+.ua-hero-sub {
+    color: var(--ink-soft);
+    font-size: 1.1rem;
+}
+
+.ua-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(31, 122, 115, 0.12);
+    color: var(--teal);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.ua-card {
+    border-radius: 20px;
+    background: var(--card);
+    border: 1px solid rgba(28, 26, 23, 0.08);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.ua-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+}
+
+.ua-card .card-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+}
+
+.ua-btn-primary {
+    background: linear-gradient(135deg, var(--ember), var(--ember-dark));
     color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 0.6rem 1.6rem;
+    font-weight: 600;
+    box-shadow: 0 10px 20px rgba(198, 72, 30, 0.25);
+}
+
+.ua-btn-primary:hover {
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.ua-btn-ghost {
+    border: 1px solid rgba(28, 26, 23, 0.18);
+    background: transparent;
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 0.55rem 1.4rem;
+    font-weight: 600;
+}
+
+.albion-btn {
+    background: linear-gradient(135deg, var(--ember), var(--ember-dark));
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    font-weight: 600;
+    box-shadow: 0 10px 20px rgba(198, 72, 30, 0.25);
 }
 
 .albion-btn:hover {
-    background-color: #c63000;
+    background: linear-gradient(135deg, var(--ember-dark), var(--ember));
     color: #fff;
 }
 
 .albion-btn-outline {
-    border: 2px solid #701604;
-    background-color: white;
-    color: #701604;
-    padding: 0.375rem 0.75rem;
+    border: 1px solid rgba(28, 26, 23, 0.25);
+    background-color: transparent;
+    color: var(--ink);
+    padding: 0.5rem 1.2rem;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 0.375rem;
+    border-radius: 999px;
 }
 
 .albion-btn-outline:hover {
-    background-color: #701604;
-    color: white;
+    background-color: rgba(198, 72, 30, 0.1);
+    color: var(--ink);
 }
 
-/* Custom pill tab styling */
 .nav-pills .nav-link {
-    color: #701604;
-    border-radius: 0.375rem;
+    color: var(--ember-dark);
+    border-radius: 0.8rem;
     text-align: left;
-    justify-content: flex-start; /* aligns icon + text to the left */
-    padding-left: 1rem; /* optional: adds space from edge */
+    justify-content: flex-start;
+    padding-left: 1rem;
+    font-weight: 600;
 }
 
 .nav-pills .nav-link:hover {
-    background-color: #f3e6e2;
-    color: #701604;
+    background-color: rgba(198, 72, 30, 0.1);
+    color: var(--ember-dark);
 }
 
 .nav-pills .nav-link.active {
-    background-color: #701604;
+    background-color: var(--ember-dark);
     color: white;
 }
 
-
-/* Custom Albion table theme */
-.albion-table thead {
-    background-color: #B97A57;
-    color: white;
+.table {
+    border-radius: 16px;
+    overflow: hidden;
 }
 
-.albion-table th {
-    background-color: #B97A57;
-    color: white;
-    border-color: #B97A57;
+.table thead {
+    background: var(--ink);
+    color: #fff;
 }
 
-.albion-table td {
-    border-color: #B97A57;
+.form-control, .form-select {
+    border-radius: 12px;
+    border: 1px solid rgba(28, 26, 23, 0.15);
+    box-shadow: none;
 }
 
+.form-control:focus, .form-select:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 0.2rem rgba(31, 122, 115, 0.2);
+}
 
+.ua-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: ua-rise 0.6s ease forwards;
+}
 
+.ua-reveal.delay-1 { animation-delay: 0.1s; }
+.ua-reveal.delay-2 { animation-delay: 0.2s; }
+.ua-reveal.delay-3 { animation-delay: 0.3s; }
+.ua-reveal.delay-4 { animation-delay: 0.4s; }
+
+@keyframes ua-rise {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .ua-section {
+        padding: 1.5rem;
+    }
+
+    .ua-hero {
+        padding: 2rem 1.6rem;
+    }
+}

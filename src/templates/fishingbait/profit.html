@@ -1,38 +1,38 @@
 {% extends "base.html" %}
-{% block title %}Fishing Bait Profit Calculator{% endblock %}
+{% block head_title %}Fishing Bait Profit Calculator{% endblock %}
 {% load static %}
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="container mt-5 ua-section ua-reveal">
     <h2 class="mb-4">Fishing Bait Profit Calculator</h2>
     <form method="POST" id="fishing-form">
         {% csrf_token %}
         <div class="row g-3">
             <div class="col-md-3">
-                <label class="form-label">🐛 Worm Price</label>
+                <label class="form-label"> Worm Price</label>
                 <input type="number" placeholder="Enter Price" name="worm_price" id="worm_price" class="form-control"
                     value="{{ worm }}" min="0" required>
             </div>
             <div class="col-md-3">
-                <label class="form-label">🪱 T1 Bait Price</label>
+                <label class="form-label"> T1 Bait Price</label>
                 <input type="number" placeholder="Enter Price" name="t1_price" id="t1_price" class="form-control"
                     value="{{ t1 }}" min="0">
             </div>
             <div class="col-md-3">
-                <label class="form-label">🪱 T3 Bait Price</label>
+                <label class="form-label"> T3 Bait Price</label>
                 <input type="number" placeholder="Enter Price" name="t3_price" id="t3_price" class="form-control"
                     value="{{ t3 }}" min="0">
             </div>
             <div class="col-md-3">
-                <label class="form-label">🪱 T5 Bait Price</label>
+                <label class="form-label"> T5 Bait Price</label>
                 <input type="number" placeholder="Enter Price" name="t5_price" id="t5_price" class="form-control"
                     value="{{ t5 }}" min="0">
             </div>
         </div>
 
         <div class="mt-4 d-flex gap-3">
-            <button type="submit" class="btn btn-success">Save Data</button>
+            <button type="submit" class="btn ua-btn-primary">Save Data</button>
         </div>
     </form>
 
