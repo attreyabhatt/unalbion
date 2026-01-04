@@ -58,43 +58,32 @@
 
 
 <div class="container mt-4 ua-reveal delay-1">
-    <div class="row">
-        <!-- Vertical Nav Tabs -->
-        <div class="col-md-3 mb-3">
-            <div class="row">
-                <div class="nav flex-column nav-pills" id="v-potion-tabs" role="tablist" aria-orientation="vertical">
-                    <button class="nav-link active" id="herbs-tab" data-bs-toggle="pill" data-bs-target="#herbs"
-                        type="button" role="tab" aria-controls="herbs" aria-selected="true">
-                        Herbs
-                    </button>
-                    <button class="nav-link" id="artifacts-tab" data-bs-toggle="pill" data-bs-target="#artifacts"
-                        type="button" role="tab" aria-controls="artifacts" aria-selected="false">
-                        Animal Artifacts
-                    </button>
-                    <button class="nav-link" id="products-tab" data-bs-toggle="pill" data-bs-target="#products"
-                        type="button" role="tab" aria-controls="products" aria-selected="false">
-                        Animal Products & Brews
-                    </button>
-                    <button class="nav-link" id="sale-tab" data-bs-toggle="pill" data-bs-target="#sale" type="button"
-                        role="tab" aria-controls="sale" aria-selected="false">
-                        Potion Sale Prices
-                    </button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="mt-4 d-flex gap-3">
-                        <button type="submit" id="save-data-btn" class="btn ua-btn-primary"
-                            data-url="{% url 'potion_calculator' %}">Save Data</button>
-                        <button type="button" id="show-profit-btn" class="btn ua-btn-ghost">Show Profits</button>
-                    </div>
-                </div>
+    <div class="ua-split">
+        <!-- Inputs Pane -->
+        <div class="ua-split-pane ua-split-pane--inputs">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+                <h4 class="mb-0">Inputs</h4>
             </div>
 
-        </div>
+            <div class="nav flex-column nav-pills mb-3" id="v-potion-tabs" role="tablist" aria-orientation="vertical">
+                <button class="nav-link active" id="herbs-tab" data-bs-toggle="pill" data-bs-target="#herbs"
+                    type="button" role="tab" aria-controls="herbs" aria-selected="true">
+                    Herbs
+                </button>
+                <button class="nav-link" id="artifacts-tab" data-bs-toggle="pill" data-bs-target="#artifacts"
+                    type="button" role="tab" aria-controls="artifacts" aria-selected="false">
+                    Animal Artifacts
+                </button>
+                <button class="nav-link" id="products-tab" data-bs-toggle="pill" data-bs-target="#products"
+                    type="button" role="tab" aria-controls="products" aria-selected="false">
+                    Animal Products & Brews
+                </button>
+                <button class="nav-link" id="sale-tab" data-bs-toggle="pill" data-bs-target="#sale" type="button"
+                    role="tab" aria-controls="sale" aria-selected="false">
+                    Potion Sale Prices
+                </button>
+            </div>
 
-        <!-- Tab Content -->
-        <div class="col-md-9">
             <div class="tab-content border p-3 bg-light rounded" id="v-potion-tabs-content">
                 <div class="tab-pane fade show active" id="herbs" role="tabpanel" aria-labelledby="herbs-tab">
                     {% include 'potions/herbs.html' %}
@@ -110,9 +99,20 @@
                 </div>
             </div>
 
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-4">
+                <button type="submit" id="save-data-btn" class="btn ua-btn-primary"
+                    data-url="{% url 'potion_calculator' %}">Save Data</button>
+                <button type="button" id="show-profit-btn" class="btn ua-btn-accent">Show Profits</button>
+            </div>
+        </div>
+
+        <!-- Results Pane -->
+        <div class="ua-split-pane ua-split-pane--results">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="mb-0">Profit Preview</h4>
+                <span class="text-muted small">Filters update instantly.</span>
+            </div>
             {% include 'potions/profit_table.html' %}
-
-
         </div>
     </div>
     </form>

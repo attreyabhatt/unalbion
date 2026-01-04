@@ -126,6 +126,28 @@ main.container {
     font-weight: 600;
 }
 
+.ua-btn-ghost:hover {
+    background-color: rgba(198, 72, 30, 0.1);
+    color: var(--ink);
+}
+
+.ua-btn-accent {
+    background: linear-gradient(135deg, rgba(31, 122, 115, 0.15), rgba(214, 161, 74, 0.25));
+    border: 1px solid rgba(31, 122, 115, 0.4);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 0.55rem 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 16px rgba(31, 122, 115, 0.18);
+}
+
+.ua-btn-accent:hover {
+    background: linear-gradient(135deg, rgba(31, 122, 115, 0.25), rgba(214, 161, 74, 0.35));
+    color: var(--ink);
+    transform: translateY(-1px);
+}
+
 .albion-btn {
     background: linear-gradient(135deg, var(--ember), var(--ember-dark));
     color: #fff;
@@ -210,6 +232,46 @@ main.container {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+.ua-split {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ua-split-pane {
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: var(--shadow-soft);
+    padding: 1.5rem;
+}
+
+.ua-split-pane--inputs {
+    flex: 1.2;
+}
+
+.ua-split-pane--results {
+    flex: 0.8;
+}
+
+@media (min-width: 992px) {
+    .ua-split {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .ua-split-pane {
+        flex: 1;
+    }
+
+    .ua-split-pane--inputs {
+        flex: 1.3;
+    }
+
+    .ua-split-pane--results {
+        flex: 0.7;
     }
 }
 

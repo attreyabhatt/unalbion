@@ -1,10 +1,10 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg ua-nav py-3">
+<nav class="navbar navbar-expand-lg ua-nav py-2">
     <div class="container">
         <!-- Logo -->
         <a class="navbar-brand" href="{% url 'home' %}">
-            <img src="{% static 'images/logo5.png' %}" alt="Unalbion Logo" width="130" class="d-inline-block align-text-top">
+            <img src="{% static 'images/logo5.png' %}" alt="Unalbion Logo" width="110" class="d-inline-block align-text-top">
         </a>
 
         <!-- Mobile toggle button -->
@@ -15,6 +15,21 @@
 
         <!-- Nav links + user control -->
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+            <ul class="navbar-nav me-3">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="profitMethodsDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Profit Methods
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profitMethodsDropdown">
+                        <li><a class="dropdown-item" href="{% url 'animal_artifacts' %}">Animal Artifacts</a></li>
+                        <li><a class="dropdown-item" href="{% url 'fishing_bait' %}">Fishing Bait</a></li>
+                        <li><a class="dropdown-item" href="{% url 'potion_calculator' %}">Potions</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><span class="dropdown-item text-muted">Cooking (Coming Soon)</span></li>
+                    </ul>
+                </li>
+            </ul>
             {% if user.is_authenticated %}
                 <ul class="navbar-nav me-3">
                     <li class="nav-item">
