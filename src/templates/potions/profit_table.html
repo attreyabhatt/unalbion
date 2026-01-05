@@ -2,7 +2,7 @@
 <div id="profit-view" class="ua-section mt-4" style="display: none;">
     <h4 class="mb-3"> Potion Profit Table</h4>
 
-    <div class="mb-3 d-flex gap-3 align-items-center">
+    <div class="mb-3 d-flex gap-3 align-items-center flex-wrap ua-profit-filters">
         <select id="profit-tier-select" class="form-select w-auto">
             <option value="all">All Tiers</option>
             {% for t in "2,3,4,5,6,7,8"|split:"," %}
@@ -26,8 +26,8 @@
         </select>
     </div>
 
-    <div class="table-responsive">
-        <table class="table table-bordered align-middle text-center">
+    <div class="table-responsive ua-table-wrap">
+        <table class="table table-bordered align-middle text-center ua-profit-table">
             <thead class="table-dark">
                 <tr>
                     <th>Potion</th>

@@ -3,7 +3,7 @@
 
 <script src="{% static 'js/potions/potion_market_prices_display.js' %}"></script>
 
-<div class="mb-3 d-flex gap-3 align-items-center">
+<div class="mb-3 d-flex gap-3 align-items-center flex-wrap ua-profit-filters">
     <select id="tier-select" class="form-select w-auto">
         <option value="all">All</option>
         {% for t in "2,3,4,5,6,7,8"|split:"," %}

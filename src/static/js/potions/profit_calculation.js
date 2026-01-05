@@ -9,6 +9,11 @@ document.addEventListener("DOMContentLoaded", function () {
             inputsView.style.display = "none";
             profitView.style.display = "block";
             renderProfitTable();
+            if (profitView) {
+                requestAnimationFrame(() => {
+                    profitView.scrollIntoView({ behavior: "smooth", block: "start" });
+                });
+            }
         });
     }
 
@@ -55,10 +60,11 @@ window.renderProfitTable = function () {
         return null;
     }
 
-    function createCell(text, className = "") {
+    function createCell(text, className = "", label = "") {
         const td = document.createElement("td");
         td.innerText = text;
         if (className) td.className = className;
+        if (label) td.setAttribute("data-label", label);
         return td;
     }
 
@@ -85,12 +91,12 @@ window.renderProfitTable = function () {
             row.setAttribute("data-enchant", "0");
             row.setAttribute("data-name", name.toLowerCase());
             row.append(
-                createCell(name),
-                createCell(tier),
-                createCell("+0"),
-                createCell("—"),
-                createCell("—"),
-                createCell("Data Insufficient", "text-muted")
+                createCell(name, "", "Potion"),
+                createCell(tier, "", "Tier"),
+                createCell("+0", "", "Enchantment"),
+                createCell("N/A", "", "Production Cost"),
+                createCell("N/A", "", "Sale Price"),
+                createCell("Data Insufficient", "text-muted", "Profit")
             );
             tbody.appendChild(row);
             return;
@@ -118,22 +124,23 @@ window.renderProfitTable = function () {
             const salePrice = getSalePrice(enchantCode);
             const profit = salePrice !== null ? salePrice - totalCost : null;
 
-            row.appendChild(createCell(name));
-            row.appendChild(createCell(tier));
-            row.appendChild(createCell("+" + enchant));
-            row.appendChild(createCell(totalCost));
+            row.appendChild(createCell(name, "", "Potion"));
+            row.appendChild(createCell(tier, "", "Tier"));
+            row.appendChild(createCell("+" + enchant, "", "Enchantment"));
+            row.appendChild(createCell(totalCost, "", "Production Cost"));
 
             if (salePrice !== null) {
-                row.appendChild(createCell(salePrice));
+                row.appendChild(createCell(salePrice, "", "Sale Price"));
                 const profitCell = createCell(Math.round(profit));
                 profitCell.className =
                     profit > 0 ? "text-success" :
                         profit < 0 ? "text-danger" :
                             "text-secondary";
+                profitCell.setAttribute("data-label", "Profit");
                 row.appendChild(profitCell);
             } else {
-                row.appendChild(createCell("—"));
-                row.appendChild(createCell("—", "text-muted"));
+                row.appendChild(createCell("N/A", "", "Sale Price"));
+                row.appendChild(createCell("N/A", "text-muted", "Profit"));
             }
 
             tbody.appendChild(row);
