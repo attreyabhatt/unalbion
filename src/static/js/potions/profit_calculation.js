@@ -39,7 +39,38 @@ window.renderProfitTable = function () {
     tbody.innerHTML = "";
 
     const recipes = calculation_data.recipes;
-    const prices = calculation_data.ingredient_prices;
+
+    function buildIngredientPricesFromInputs() {
+        const prices = {};
+        const tierPrefixMap = {
+            RUGGED: "t3",
+            FINE: "t5",
+            EXCELLENT: "t7",
+        };
+
+        document.querySelectorAll(".ingredient-input").forEach(input => {
+            if (!input.value) return;
+            const val = parseInt(input.value);
+            if (isNaN(val)) return;
+
+            const ingredientCode = input.dataset.ingredient;
+            if (ingredientCode) {
+                prices[ingredientCode] = val;
+                return;
+            }
+
+            const codeBase = input.dataset.codeBase;
+            const tier = input.dataset.tier;
+            if (codeBase && tier && tierPrefixMap[tier]) {
+                prices[`${tierPrefixMap[tier]}${codeBase}`] = val;
+            }
+        });
+
+        return prices;
+    }
+
+    const inputPrices = buildIngredientPricesFromInputs();
+    const prices = Object.keys(inputPrices).length > 0 ? inputPrices : calculation_data.ingredient_prices;
     const animalRemainsPrice = prices.animal_remains || 0;
     console.log(prices)
 
